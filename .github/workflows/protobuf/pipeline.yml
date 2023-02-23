@@ -1,0 +1,87 @@
+on:
+  push:
+    paths-ignore:
+      - '**/**.md'
+      - 'docs/**'
+env:
+  MAJOR_MINOR_PATCH: 0.1.0
+  
+concurrency: ci-${{ github.ref }}
+
+name: test-protobuf
+
+jobs:
+  publish_template:
+    name: "Publish package"
+    runs-on: ubuntu-latest
+    steps:
+    - name: Version suffix
+      id: version_suffix
+      run: |
+        if [[ ${{ github.event_name }} == 'pull_request' ]]; then
+          echo 'for pull request pipeline'
+          USE=true
+          SUFFIX=${GITHUB_HEAD_REF##*/}.${{github.run_number}}
+          EXTENSION="-${SUFFIX}"
+        else
+          if [[ ${{ github.ref }} == "refs/heads/${{ github.event.repository.default_branch }}" ]]; then
+            echo 'for default branch pipeline'
+            USE=false
+            SUFFIX=''
+            EXTENSION=''
+          else
+            echo 'for feature branch pipeline'
+            USE=true
+            SUFFIX=${GITHUB_REF##*/}.${{github.run_number}}
+            EXTENSION="-${SUFFIX}"
+          fi
+        fi
+        echo 'use_version_suffix' $USE
+        echo 'version_suffix: ' $SUFFIX
+        echo "use_version_suffix=$USE" >> $GITHUB_OUTPUT
+        echo "version_suffix=$SUFFIX" >> $GITHUB_OUTPUT
+        echo "extension=$EXTENSION" >> $GITHUB_OUTPUT
+    - name : Semantic version
+      id: semantic_version
+      run: |
+        SEMANTIC_VERSION="${{ env.MAJOR_MINOR_PATCH }}.${{github.run_number}}"
+        SEMANTIC_VERSION="${SEMANTIC_VERSION}${{ steps.version_suffix.outputs.extension }}"
+        echo 'MAJOR_MINOR_PATCH: ' $MAJOR_MINOR_PATCH
+        echo 'SEMANTIC_VERSION: ' $SEMANTIC_VERSION
+        echo "semantic_version=$SEMANTIC_VERSION" >> $GITHUB_OUTPUT
+        echo "major_minor_patch=$MAJOR_MINOR_PATCH" >> $GITHUB_OUTPUT
+    - name: Set dotnet parameter
+      id: dotnet
+      run: |
+        ARGS=()
+        ARGS+=("-p:VersionPrefix=${{ steps.semantic_version.outputs.major_minor_patch_version }}")
+        if [[ "${{ steps.version_suffix.outputs.use_version_suffix }}" == 'true' ]]; then
+          ARGS+=('--version-suffix' "${{ steps.version_suffix.outputs.version_suffix }}")
+        fi
+        echo 'parameters' ${ARGS[@]}
+        echo "parameters=${ARGS[@]}" >> $GITHUB_OUTPUT
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: 7.x
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: |
+       dotnet build --no-restore -c Release ${{ steps.dotnet.outputs.parameters }}
+    - name: Pack
+      run: |
+        dotnet pack --no-restore --no-build -c Release ${{ steps.dotnet.outputs.parameters }}
+    - name: Publish
+      run: dotnet nuget push **\**.nupkg --source "https://nuget.pkg.github.com/KinNeko-De" --api-key ${{ secrets.GITHUB_TOKEN }} --skip-duplicate
+    #- name: Create semantic versioning git tag
+    #  uses: actions/github-script@v6
+    #  with:
+    #    script: |
+    #      github.rest.git.createRef({
+    #        owner: context.repo.owner,
+    #        repo: context.repo.repo,
+    #        ref: "refs/tags/${{ steps.semantic_version.outputs.semantic_version }}",
+    #        sha: context.sha
+    #      })
