@@ -1,7 +1,7 @@
 on:
   push:
     paths:
-      - '.github/workdlows/protobuf-pipeline.yml'
+      - '.github/workflows/protobuf-pipeline.yml'
       - 'protos/kinnekode/protobuf'
       - 'dotnet/protobuf'
       - 'golang/kinnekode/protobuf'
