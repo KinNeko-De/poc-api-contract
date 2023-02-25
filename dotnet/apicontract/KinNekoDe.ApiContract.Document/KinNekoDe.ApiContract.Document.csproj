@@ -33,22 +33,33 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Google.Protobuf" Version="3.21.7" />
-    <PackageReference Include="Grpc.Tools" Version="2.49.1">
+    <PackageReference Include="Google.Protobuf" Version="3.22.0" />
+    <PackageReference Include="Grpc.Tools" Version="2.51.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="kinneko-de.api-contract.csharp" Version="0.1.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Protobuf Include="../../../kinnekode/apicontract/something/**/*.proto" ProtoRoot="../../.." GrpcServices="None">
-      <Link>kinnekode/apicontract/something/%(RecursiveDir)%(Filename)%(Extension)</Link>
+    <Protobuf Include="../../../protos/kinnekode/apicontract/document/**/*.proto" ProtoRoot="../../.." GrpcServices="None">
+      <Link>kinnekode/apicontract/document/%(RecursiveDir)%(Filename)%(Extension)</Link>
     </Protobuf>
-    <Protobuf Update="../../../kinnekode/apicontract/something/**/grpc/**/*.proto" GrpcServices="Both" />
+    <Protobuf Update="../../../protos/kinnekode/apicontract/document/**/grpc/**/*.proto" GrpcServices="Both" />
 
-    <Protobuf Include="../../../kinnekode/protobuf/**/*.proto" ProtoRoot="../../.." GrpcServices="None" CompileOutputs="false">
+    <Protobuf Include="../../../protos/kinnekode/protobuf/**/*.proto" ProtoRoot="../../.." GrpcServices="None" CompileOutputs="false">
       <Link>kinnekode\protobuf\%(RecursiveDir)%(Filename)%(Extension)</Link>
     </Protobuf>
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+    <PackageReference Include="Grpc.Core">
+      <Version>2.46.6</Version>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.1'">
+    <PackageReference Include="Grpc.Core">
+      <Version>2.46.6</Version>
+    </PackageReference>
   </ItemGroup>
 </Project>
