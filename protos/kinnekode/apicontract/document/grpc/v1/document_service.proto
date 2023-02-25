@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package kinnekode.apicontract.document.grpc.v1
+package kinnekode.apicontract.document.grpc.v1;
 
 option go_package = "github.com/kinneko-de/api-contract/golang/kinnekode/apicontract/document/grpc/v1";
 
