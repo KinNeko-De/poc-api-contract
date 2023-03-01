@@ -1,3 +1,3 @@
-module github.com/KinNeko-De/test-api-contract
+module github.com/KinNeko-De/test-api-contract/golang
 
-go 1.20
+go 1.19
