@@ -42,12 +42,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Protobuf Include="../../../../protos/kinnekode/apicontract/restaurant/**/*.proto" ProtoRoot="../../.." GrpcServices="None">
+    <Protobuf Include="../../../../protos/kinnekode/apicontract/restaurant/**/*.proto" ProtoRoot="../../../.." GrpcServices="None">
       <Link>kinnekode/apicontract/restaurant/%(RecursiveDir)%(Filename)%(Extension)</Link>
     </Protobuf>
     <Protobuf Update="../../../../protos/kinnekode/apicontract/restaurant/**/grpc/**/*.proto" GrpcServices="Both" />
 
-    <Protobuf Include="../../../../protos/kinnekode/protobuf/**/*.proto" ProtoRoot="../../.." GrpcServices="None" CompileOutputs="false">
+    <Protobuf Include="../../../../protos/kinnekode/protobuf/**/*.proto" ProtoRoot="../../../.." GrpcServices="None" CompileOutputs="false">
       <Link>kinnekode\protobuf\%(RecursiveDir)%(Filename)%(Extension)</Link>
     </Protobuf>
   </ItemGroup>
