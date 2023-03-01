@@ -8,7 +8,7 @@
     <Product>KinNekoDe</Product>
     <PackageType>Dependency</PackageType>
     <VersionPrefix>0.1.0</VersionPrefix>
-    <PackageId>kinneko-de.api-contract.restaurant</PackageId>
+    <PackageId>kinnekode.api-contract.restaurant</PackageId>
     <Title>KinNekoDe.ApiContract.Restaurant</Title>
     <Authors>Nils Diekmann</Authors>
     <Description>Api contract specified in protobuf for project restaurant.</Description>
@@ -42,12 +42,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Protobuf Include="../../../../protos/kinnekode/apicontract/restaurant/**/*.proto" ProtoRoot="../../../.." GrpcServices="None">
+    <Protobuf Include="../../../../protos/kinnekode/apicontract/restaurant/**/*.proto" ProtoRoot="../../../../protos" GrpcServices="None">
       <Link>kinnekode/apicontract/restaurant/%(RecursiveDir)%(Filename)%(Extension)</Link>
     </Protobuf>
     <Protobuf Update="../../../../protos/kinnekode/apicontract/restaurant/**/grpc/**/*.proto" GrpcServices="Both" />
 
-    <Protobuf Include="../../../../protos/kinnekode/protobuf/**/*.proto" ProtoRoot="../../../.." GrpcServices="None" CompileOutputs="false">
+    <Protobuf Include="../../../../protos/kinnekode/protobuf/**/*.proto" ProtoRoot="../../../../protos" GrpcServices="None" CompileOutputs="false">
       <Link>kinnekode\protobuf\%(RecursiveDir)%(Filename)%(Extension)</Link>
     </Protobuf>
   </ItemGroup>

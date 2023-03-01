@@ -1,6 +1,7 @@
 syntax = "proto3";
 
 package kinnekode.protobuf;
+
 option go_package = "github.com/kinneko-de/api-contract/golang/kinnekode/protobuf";
 
 // Universally Unique Identifier (https://www.rfc-editor.org/rfc/rfc4122)

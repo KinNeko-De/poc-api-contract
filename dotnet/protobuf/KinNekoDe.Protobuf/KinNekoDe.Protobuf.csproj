@@ -8,7 +8,7 @@
     <Product>KinNekoDe</Product>
     <PackageType>Dependency</PackageType>
     <VersionPrefix>0.1.0</VersionPrefix>
-    <PackageId>kinneko-de.protobuf</PackageId>
+    <PackageId>kinnekode.protobuf</PackageId>
     <Title>KinNekoDe.ApiContract.Restaurant</Title>
     <Authors>Nils Diekmann</Authors>
     <Description>Api contract specified in protobuf.</Description>
@@ -41,7 +41,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Protobuf Include="../../../protos/kinnekode/protobuf/**/*.proto" ProtoRoot="../../.." GrpcServices="None">
+    <Protobuf Include="../../../protos/kinnekode/protobuf/**/*.proto" ProtoRoot="../../../protos" GrpcServices="None">
       <Link>kinnekode/protobuf/%(RecursiveDir)%(Filename)%(Extension)</Link>
     </Protobuf>
   </ItemGroup>
