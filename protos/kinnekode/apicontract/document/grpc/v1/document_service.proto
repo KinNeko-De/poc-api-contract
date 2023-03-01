@@ -4,7 +4,7 @@ import "kinnekode/protobuf/uuid.proto";
 
 package kinnekode.apicontract.document.grpc.v1;
 
-option go_package = "github.com/kinneko-de/api-contract/golang/kinnekode/apicontract/document/grpc/v1";
+option go_package = "github.com/kinneko-de/test-api-contract/golang/kinnekode/apicontract/document/grpc/v1";
 
 service DocumentService {
   rpc UploadDocument(stream UploadDocumentRequest) returns (UploadDocumentResponse);
