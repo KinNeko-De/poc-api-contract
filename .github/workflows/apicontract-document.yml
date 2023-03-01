@@ -2,9 +2,9 @@ on:
   push:
     paths:
       - '.github/workflows/apicontract-document.yml'
-      - 'protos/kinnekode/apicontract/document'
-      - 'dotnet/apicontract/document'
-      - 'golang/kinnekode/apicontract/document'
+      - 'protos/kinnekode/apicontract/document/**'
+      - 'dotnet/apicontract/document/**'
+      - 'golang/kinnekode/apicontract/document/**'
       - '!**/**.md'
       - '!docs/**'
 env:
