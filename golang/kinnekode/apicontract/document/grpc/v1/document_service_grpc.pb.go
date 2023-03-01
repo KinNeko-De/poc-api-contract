@@ -22,10 +22,8 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type DocumentServiceClient interface {
-	StartUpload(ctx context.Context, opts ...grpc.CallOption) (DocumentService_StartUploadClient, error)
-	StartDownload(ctx context.Context, in *StartDownloadRequest, opts ...grpc.CallOption) (DocumentService_StartDownloadClient, error)
-	ResumeUpload(ctx context.Context, opts ...grpc.CallOption) (DocumentService_ResumeUploadClient, error)
-	ResumeDownload(ctx context.Context, in *ResumeDownloadRequest, opts ...grpc.CallOption) (DocumentService_ResumeDownloadClient, error)
+	UploadDocument(ctx context.Context, opts ...grpc.CallOption) (DocumentService_UploadDocumentClient, error)
+	DownloadDocument(ctx context.Context, in *DownloadDocumentRequest, opts ...grpc.CallOption) (DocumentService_DownloadDocumentClient, error)
 }
 
 type documentServiceClient struct {
@@ -36,46 +34,46 @@ func NewDocumentServiceClient(cc grpc.ClientConnInterface) DocumentServiceClient
 	return &documentServiceClient{cc}
 }
 
-func (c *documentServiceClient) StartUpload(ctx context.Context, opts ...grpc.CallOption) (DocumentService_StartUploadClient, error) {
-	stream, err := c.cc.NewStream(ctx, &DocumentService_ServiceDesc.Streams[0], "/kinnekode.apicontract.document.grpc.v1.DocumentService/StartUpload", opts...)
+func (c *documentServiceClient) UploadDocument(ctx context.Context, opts ...grpc.CallOption) (DocumentService_UploadDocumentClient, error) {
+	stream, err := c.cc.NewStream(ctx, &DocumentService_ServiceDesc.Streams[0], "/kinnekode.apicontract.document.grpc.v1.DocumentService/UploadDocument", opts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &documentServiceStartUploadClient{stream}
+	x := &documentServiceUploadDocumentClient{stream}
 	return x, nil
 }
 
-type DocumentService_StartUploadClient interface {
-	Send(*StartUploadRequest) error
-	CloseAndRecv() (*StartUploadResponse, error)
+type DocumentService_UploadDocumentClient interface {
+	Send(*UploadDocumentRequest) error
+	CloseAndRecv() (*UploadDocumentResponse, error)
 	grpc.ClientStream
 }
 
-type documentServiceStartUploadClient struct {
+type documentServiceUploadDocumentClient struct {
 	grpc.ClientStream
 }
 
-func (x *documentServiceStartUploadClient) Send(m *StartUploadRequest) error {
+func (x *documentServiceUploadDocumentClient) Send(m *UploadDocumentRequest) error {
 	return x.ClientStream.SendMsg(m)
 }
 
-func (x *documentServiceStartUploadClient) CloseAndRecv() (*StartUploadResponse, error) {
+func (x *documentServiceUploadDocumentClient) CloseAndRecv() (*UploadDocumentResponse, error) {
 	if err := x.ClientStream.CloseSend(); err != nil {
 		return nil, err
 	}
-	m := new(StartUploadResponse)
+	m := new(UploadDocumentResponse)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
 	return m, nil
 }
 
-func (c *documentServiceClient) StartDownload(ctx context.Context, in *StartDownloadRequest, opts ...grpc.CallOption) (DocumentService_StartDownloadClient, error) {
-	stream, err := c.cc.NewStream(ctx, &DocumentService_ServiceDesc.Streams[1], "/kinnekode.apicontract.document.grpc.v1.DocumentService/StartDownload", opts...)
+func (c *documentServiceClient) DownloadDocument(ctx context.Context, in *DownloadDocumentRequest, opts ...grpc.CallOption) (DocumentService_DownloadDocumentClient, error) {
+	stream, err := c.cc.NewStream(ctx, &DocumentService_ServiceDesc.Streams[1], "/kinnekode.apicontract.document.grpc.v1.DocumentService/DownloadDocument", opts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &documentServiceStartDownloadClient{stream}
+	x := &documentServiceDownloadDocumentClient{stream}
 	if err := x.ClientStream.SendMsg(in); err != nil {
 		return nil, err
 	}
@@ -85,83 +83,17 @@ func (c *documentServiceClient) StartDownload(ctx context.Context, in *StartDown
 	return x, nil
 }
 
-type DocumentService_StartDownloadClient interface {
-	Recv() (*StartDownloadResponse, error)
+type DocumentService_DownloadDocumentClient interface {
+	Recv() (*DownloadDocumentResponse, error)
 	grpc.ClientStream
 }
 
-type documentServiceStartDownloadClient struct {
+type documentServiceDownloadDocumentClient struct {
 	grpc.ClientStream
 }
 
-func (x *documentServiceStartDownloadClient) Recv() (*StartDownloadResponse, error) {
-	m := new(StartDownloadResponse)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
-func (c *documentServiceClient) ResumeUpload(ctx context.Context, opts ...grpc.CallOption) (DocumentService_ResumeUploadClient, error) {
-	stream, err := c.cc.NewStream(ctx, &DocumentService_ServiceDesc.Streams[2], "/kinnekode.apicontract.document.grpc.v1.DocumentService/ResumeUpload", opts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &documentServiceResumeUploadClient{stream}
-	return x, nil
-}
-
-type DocumentService_ResumeUploadClient interface {
-	Send(*ResumeUploadRequest) error
-	CloseAndRecv() (*ResumeUploadResponse, error)
-	grpc.ClientStream
-}
-
-type documentServiceResumeUploadClient struct {
-	grpc.ClientStream
-}
-
-func (x *documentServiceResumeUploadClient) Send(m *ResumeUploadRequest) error {
-	return x.ClientStream.SendMsg(m)
-}
-
-func (x *documentServiceResumeUploadClient) CloseAndRecv() (*ResumeUploadResponse, error) {
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	m := new(ResumeUploadResponse)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
-func (c *documentServiceClient) ResumeDownload(ctx context.Context, in *ResumeDownloadRequest, opts ...grpc.CallOption) (DocumentService_ResumeDownloadClient, error) {
-	stream, err := c.cc.NewStream(ctx, &DocumentService_ServiceDesc.Streams[3], "/kinnekode.apicontract.document.grpc.v1.DocumentService/ResumeDownload", opts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &documentServiceResumeDownloadClient{stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-type DocumentService_ResumeDownloadClient interface {
-	Recv() (*ResumeDownloadResponse, error)
-	grpc.ClientStream
-}
-
-type documentServiceResumeDownloadClient struct {
-	grpc.ClientStream
-}
-
-func (x *documentServiceResumeDownloadClient) Recv() (*ResumeDownloadResponse, error) {
-	m := new(ResumeDownloadResponse)
+func (x *documentServiceDownloadDocumentClient) Recv() (*DownloadDocumentResponse, error) {
+	m := new(DownloadDocumentResponse)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
@@ -172,10 +104,8 @@ func (x *documentServiceResumeDownloadClient) Recv() (*ResumeDownloadResponse, e
 // All implementations must embed UnimplementedDocumentServiceServer
 // for forward compatibility
 type DocumentServiceServer interface {
-	StartUpload(DocumentService_StartUploadServer) error
-	StartDownload(*StartDownloadRequest, DocumentService_StartDownloadServer) error
-	ResumeUpload(DocumentService_ResumeUploadServer) error
-	ResumeDownload(*ResumeDownloadRequest, DocumentService_ResumeDownloadServer) error
+	UploadDocument(DocumentService_UploadDocumentServer) error
+	DownloadDocument(*DownloadDocumentRequest, DocumentService_DownloadDocumentServer) error
 	mustEmbedUnimplementedDocumentServiceServer()
 }
 
@@ -183,17 +113,11 @@ type DocumentServiceServer interface {
 type UnimplementedDocumentServiceServer struct {
 }
 
-func (UnimplementedDocumentServiceServer) StartUpload(DocumentService_StartUploadServer) error {
-	return status.Errorf(codes.Unimplemented, "method StartUpload not implemented")
+func (UnimplementedDocumentServiceServer) UploadDocument(DocumentService_UploadDocumentServer) error {
+	return status.Errorf(codes.Unimplemented, "method UploadDocument not implemented")
 }
-func (UnimplementedDocumentServiceServer) StartDownload(*StartDownloadRequest, DocumentService_StartDownloadServer) error {
-	return status.Errorf(codes.Unimplemented, "method StartDownload not implemented")
-}
-func (UnimplementedDocumentServiceServer) ResumeUpload(DocumentService_ResumeUploadServer) error {
-	return status.Errorf(codes.Unimplemented, "method ResumeUpload not implemented")
-}
-func (UnimplementedDocumentServiceServer) ResumeDownload(*ResumeDownloadRequest, DocumentService_ResumeDownloadServer) error {
-	return status.Errorf(codes.Unimplemented, "method ResumeDownload not implemented")
+func (UnimplementedDocumentServiceServer) DownloadDocument(*DownloadDocumentRequest, DocumentService_DownloadDocumentServer) error {
+	return status.Errorf(codes.Unimplemented, "method DownloadDocument not implemented")
 }
 func (UnimplementedDocumentServiceServer) mustEmbedUnimplementedDocumentServiceServer() {}
 
@@ -208,97 +132,50 @@ func RegisterDocumentServiceServer(s grpc.ServiceRegistrar, srv DocumentServiceS
 	s.RegisterService(&DocumentService_ServiceDesc, srv)
 }
 
-func _DocumentService_StartUpload_Handler(srv interface{}, stream grpc.ServerStream) error {
-	return srv.(DocumentServiceServer).StartUpload(&documentServiceStartUploadServer{stream})
+func _DocumentService_UploadDocument_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(DocumentServiceServer).UploadDocument(&documentServiceUploadDocumentServer{stream})
 }
 
-type DocumentService_StartUploadServer interface {
-	SendAndClose(*StartUploadResponse) error
-	Recv() (*StartUploadRequest, error)
+type DocumentService_UploadDocumentServer interface {
+	SendAndClose(*UploadDocumentResponse) error
+	Recv() (*UploadDocumentRequest, error)
 	grpc.ServerStream
 }
 
-type documentServiceStartUploadServer struct {
+type documentServiceUploadDocumentServer struct {
 	grpc.ServerStream
 }
 
-func (x *documentServiceStartUploadServer) SendAndClose(m *StartUploadResponse) error {
+func (x *documentServiceUploadDocumentServer) SendAndClose(m *UploadDocumentResponse) error {
 	return x.ServerStream.SendMsg(m)
 }
 
-func (x *documentServiceStartUploadServer) Recv() (*StartUploadRequest, error) {
-	m := new(StartUploadRequest)
+func (x *documentServiceUploadDocumentServer) Recv() (*UploadDocumentRequest, error) {
+	m := new(UploadDocumentRequest)
 	if err := x.ServerStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
 	return m, nil
 }
 
-func _DocumentService_StartDownload_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(StartDownloadRequest)
+func _DocumentService_DownloadDocument_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(DownloadDocumentRequest)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
-	return srv.(DocumentServiceServer).StartDownload(m, &documentServiceStartDownloadServer{stream})
+	return srv.(DocumentServiceServer).DownloadDocument(m, &documentServiceDownloadDocumentServer{stream})
 }
 
-type DocumentService_StartDownloadServer interface {
-	Send(*StartDownloadResponse) error
+type DocumentService_DownloadDocumentServer interface {
+	Send(*DownloadDocumentResponse) error
 	grpc.ServerStream
 }
 
-type documentServiceStartDownloadServer struct {
+type documentServiceDownloadDocumentServer struct {
 	grpc.ServerStream
 }
 
-func (x *documentServiceStartDownloadServer) Send(m *StartDownloadResponse) error {
-	return x.ServerStream.SendMsg(m)
-}
-
-func _DocumentService_ResumeUpload_Handler(srv interface{}, stream grpc.ServerStream) error {
-	return srv.(DocumentServiceServer).ResumeUpload(&documentServiceResumeUploadServer{stream})
-}
-
-type DocumentService_ResumeUploadServer interface {
-	SendAndClose(*ResumeUploadResponse) error
-	Recv() (*ResumeUploadRequest, error)
-	grpc.ServerStream
-}
-
-type documentServiceResumeUploadServer struct {
-	grpc.ServerStream
-}
-
-func (x *documentServiceResumeUploadServer) SendAndClose(m *ResumeUploadResponse) error {
-	return x.ServerStream.SendMsg(m)
-}
-
-func (x *documentServiceResumeUploadServer) Recv() (*ResumeUploadRequest, error) {
-	m := new(ResumeUploadRequest)
-	if err := x.ServerStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
-func _DocumentService_ResumeDownload_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(ResumeDownloadRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(DocumentServiceServer).ResumeDownload(m, &documentServiceResumeDownloadServer{stream})
-}
-
-type DocumentService_ResumeDownloadServer interface {
-	Send(*ResumeDownloadResponse) error
-	grpc.ServerStream
-}
-
-type documentServiceResumeDownloadServer struct {
-	grpc.ServerStream
-}
-
-func (x *documentServiceResumeDownloadServer) Send(m *ResumeDownloadResponse) error {
+func (x *documentServiceDownloadDocumentServer) Send(m *DownloadDocumentResponse) error {
 	return x.ServerStream.SendMsg(m)
 }
 
@@ -311,23 +188,13 @@ var DocumentService_ServiceDesc = grpc.ServiceDesc{
 	Methods:     []grpc.MethodDesc{},
 	Streams: []grpc.StreamDesc{
 		{
-			StreamName:    "StartUpload",
-			Handler:       _DocumentService_StartUpload_Handler,
+			StreamName:    "UploadDocument",
+			Handler:       _DocumentService_UploadDocument_Handler,
 			ClientStreams: true,
 		},
 		{
-			StreamName:    "StartDownload",
-			Handler:       _DocumentService_StartDownload_Handler,
-			ServerStreams: true,
-		},
-		{
-			StreamName:    "ResumeUpload",
-			Handler:       _DocumentService_ResumeUpload_Handler,
-			ClientStreams: true,
-		},
-		{
-			StreamName:    "ResumeDownload",
-			Handler:       _DocumentService_ResumeDownload_Handler,
+			StreamName:    "DownloadDocument",
+			Handler:       _DocumentService_DownloadDocument_Handler,
 			ServerStreams: true,
 		},
 	},

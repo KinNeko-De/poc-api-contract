@@ -7,6 +7,7 @@
 package v1
 
 import (
+	protobuf "github.com/kinneko-de/api-contract/golang/kinnekode/protobuf"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -20,20 +21,20 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type StartUploadRequest struct {
+type UploadDocumentRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Types that are assignable to UploadRequest:
+	// Types that are assignable to Content:
 	//
-	//	*StartUploadRequest_FileMetadata
-	//	*StartUploadRequest_FilePayload
-	UploadRequest isStartUploadRequest_UploadRequest `protobuf_oneof:"upload_request"`
+	//	*UploadDocumentRequest_Metadata_
+	//	*UploadDocumentRequest_Payload_
+	Content isUploadDocumentRequest_Content `protobuf_oneof:"content"`
 }
 
-func (x *StartUploadRequest) Reset() {
-	*x = StartUploadRequest{}
+func (x *UploadDocumentRequest) Reset() {
+	*x = UploadDocumentRequest{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_kinnekode_apicontract_document_grpc_v1_document_service_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -41,13 +42,13 @@ func (x *StartUploadRequest) Reset() {
 	}
 }
 
-func (x *StartUploadRequest) String() string {
+func (x *UploadDocumentRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*StartUploadRequest) ProtoMessage() {}
+func (*UploadDocumentRequest) ProtoMessage() {}
 
-func (x *StartUploadRequest) ProtoReflect() protoreflect.Message {
+func (x *UploadDocumentRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_kinnekode_apicontract_document_grpc_v1_document_service_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -59,56 +60,58 @@ func (x *StartUploadRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StartUploadRequest.ProtoReflect.Descriptor instead.
-func (*StartUploadRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use UploadDocumentRequest.ProtoReflect.Descriptor instead.
+func (*UploadDocumentRequest) Descriptor() ([]byte, []int) {
 	return file_kinnekode_apicontract_document_grpc_v1_document_service_proto_rawDescGZIP(), []int{0}
 }
 
-func (m *StartUploadRequest) GetUploadRequest() isStartUploadRequest_UploadRequest {
+func (m *UploadDocumentRequest) GetContent() isUploadDocumentRequest_Content {
 	if m != nil {
-		return m.UploadRequest
+		return m.Content
 	}
 	return nil
 }
 
-func (x *StartUploadRequest) GetFileMetadata() *FileMetadata {
-	if x, ok := x.GetUploadRequest().(*StartUploadRequest_FileMetadata); ok {
-		return x.FileMetadata
+func (x *UploadDocumentRequest) GetMetadata() *UploadDocumentRequest_Metadata {
+	if x, ok := x.GetContent().(*UploadDocumentRequest_Metadata_); ok {
+		return x.Metadata
 	}
 	return nil
 }
 
-func (x *StartUploadRequest) GetFilePayload() *FilePayload {
-	if x, ok := x.GetUploadRequest().(*StartUploadRequest_FilePayload); ok {
-		return x.FilePayload
+func (x *UploadDocumentRequest) GetPayload() *UploadDocumentRequest_Payload {
+	if x, ok := x.GetContent().(*UploadDocumentRequest_Payload_); ok {
+		return x.Payload
 	}
 	return nil
 }
 
-type isStartUploadRequest_UploadRequest interface {
-	isStartUploadRequest_UploadRequest()
+type isUploadDocumentRequest_Content interface {
+	isUploadDocumentRequest_Content()
 }
 
-type StartUploadRequest_FileMetadata struct {
-	FileMetadata *FileMetadata `protobuf:"bytes,1,opt,name=file_metadata,json=fileMetadata,proto3,oneof"`
+type UploadDocumentRequest_Metadata_ struct {
+	Metadata *UploadDocumentRequest_Metadata `protobuf:"bytes,1,opt,name=metadata,proto3,oneof"`
 }
 
-type StartUploadRequest_FilePayload struct {
-	FilePayload *FilePayload `protobuf:"bytes,2,opt,name=file_payload,json=filePayload,proto3,oneof"`
+type UploadDocumentRequest_Payload_ struct {
+	Payload *UploadDocumentRequest_Payload `protobuf:"bytes,2,opt,name=payload,proto3,oneof"`
 }
 
-func (*StartUploadRequest_FileMetadata) isStartUploadRequest_UploadRequest() {}
+func (*UploadDocumentRequest_Metadata_) isUploadDocumentRequest_Content() {}
 
-func (*StartUploadRequest_FilePayload) isStartUploadRequest_UploadRequest() {}
+func (*UploadDocumentRequest_Payload_) isUploadDocumentRequest_Content() {}
 
-type StartUploadResponse struct {
+type UploadDocumentResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
+
+	DocumentId *protobuf.Uuid `protobuf:"bytes,1,opt,name=document_id,json=documentId,proto3" json:"document_id,omitempty"`
 }
 
-func (x *StartUploadResponse) Reset() {
-	*x = StartUploadResponse{}
+func (x *UploadDocumentResponse) Reset() {
+	*x = UploadDocumentResponse{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_kinnekode_apicontract_document_grpc_v1_document_service_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -116,13 +119,13 @@ func (x *StartUploadResponse) Reset() {
 	}
 }
 
-func (x *StartUploadResponse) String() string {
+func (x *UploadDocumentResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*StartUploadResponse) ProtoMessage() {}
+func (*UploadDocumentResponse) ProtoMessage() {}
 
-func (x *StartUploadResponse) ProtoReflect() protoreflect.Message {
+func (x *UploadDocumentResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_kinnekode_apicontract_document_grpc_v1_document_service_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -134,19 +137,26 @@ func (x *StartUploadResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StartUploadResponse.ProtoReflect.Descriptor instead.
-func (*StartUploadResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use UploadDocumentResponse.ProtoReflect.Descriptor instead.
+func (*UploadDocumentResponse) Descriptor() ([]byte, []int) {
 	return file_kinnekode_apicontract_document_grpc_v1_document_service_proto_rawDescGZIP(), []int{1}
 }
 
-type StartDownloadRequest struct {
+func (x *UploadDocumentResponse) GetDocumentId() *protobuf.Uuid {
+	if x != nil {
+		return x.DocumentId
+	}
+	return nil
+}
+
+type DownloadDocumentRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 }
 
-func (x *StartDownloadRequest) Reset() {
-	*x = StartDownloadRequest{}
+func (x *DownloadDocumentRequest) Reset() {
+	*x = DownloadDocumentRequest{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_kinnekode_apicontract_document_grpc_v1_document_service_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -154,13 +164,13 @@ func (x *StartDownloadRequest) Reset() {
 	}
 }
 
-func (x *StartDownloadRequest) String() string {
+func (x *DownloadDocumentRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*StartDownloadRequest) ProtoMessage() {}
+func (*DownloadDocumentRequest) ProtoMessage() {}
 
-func (x *StartDownloadRequest) ProtoReflect() protoreflect.Message {
+func (x *DownloadDocumentRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_kinnekode_apicontract_document_grpc_v1_document_service_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -172,19 +182,19 @@ func (x *StartDownloadRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StartDownloadRequest.ProtoReflect.Descriptor instead.
-func (*StartDownloadRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use DownloadDocumentRequest.ProtoReflect.Descriptor instead.
+func (*DownloadDocumentRequest) Descriptor() ([]byte, []int) {
 	return file_kinnekode_apicontract_document_grpc_v1_document_service_proto_rawDescGZIP(), []int{2}
 }
 
-type StartDownloadResponse struct {
+type DownloadDocumentResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 }
 
-func (x *StartDownloadResponse) Reset() {
-	*x = StartDownloadResponse{}
+func (x *DownloadDocumentResponse) Reset() {
+	*x = DownloadDocumentResponse{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_kinnekode_apicontract_document_grpc_v1_document_service_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -192,13 +202,13 @@ func (x *StartDownloadResponse) Reset() {
 	}
 }
 
-func (x *StartDownloadResponse) String() string {
+func (x *DownloadDocumentResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*StartDownloadResponse) ProtoMessage() {}
+func (*DownloadDocumentResponse) ProtoMessage() {}
 
-func (x *StartDownloadResponse) ProtoReflect() protoreflect.Message {
+func (x *DownloadDocumentResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_kinnekode_apicontract_document_grpc_v1_document_service_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -210,19 +220,21 @@ func (x *StartDownloadResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StartDownloadResponse.ProtoReflect.Descriptor instead.
-func (*StartDownloadResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use DownloadDocumentResponse.ProtoReflect.Descriptor instead.
+func (*DownloadDocumentResponse) Descriptor() ([]byte, []int) {
 	return file_kinnekode_apicontract_document_grpc_v1_document_service_proto_rawDescGZIP(), []int{3}
 }
 
-type ResumeUploadRequest struct {
+type UploadDocumentRequest_Metadata struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
+
+	FileName string `protobuf:"bytes,1,opt,name=file_name,json=fileName,proto3" json:"file_name,omitempty"`
 }
 
-func (x *ResumeUploadRequest) Reset() {
-	*x = ResumeUploadRequest{}
+func (x *UploadDocumentRequest_Metadata) Reset() {
+	*x = UploadDocumentRequest_Metadata{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_kinnekode_apicontract_document_grpc_v1_document_service_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -230,13 +242,13 @@ func (x *ResumeUploadRequest) Reset() {
 	}
 }
 
-func (x *ResumeUploadRequest) String() string {
+func (x *UploadDocumentRequest_Metadata) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ResumeUploadRequest) ProtoMessage() {}
+func (*UploadDocumentRequest_Metadata) ProtoMessage() {}
 
-func (x *ResumeUploadRequest) ProtoReflect() protoreflect.Message {
+func (x *UploadDocumentRequest_Metadata) ProtoReflect() protoreflect.Message {
 	mi := &file_kinnekode_apicontract_document_grpc_v1_document_service_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -248,19 +260,28 @@ func (x *ResumeUploadRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ResumeUploadRequest.ProtoReflect.Descriptor instead.
-func (*ResumeUploadRequest) Descriptor() ([]byte, []int) {
-	return file_kinnekode_apicontract_document_grpc_v1_document_service_proto_rawDescGZIP(), []int{4}
+// Deprecated: Use UploadDocumentRequest_Metadata.ProtoReflect.Descriptor instead.
+func (*UploadDocumentRequest_Metadata) Descriptor() ([]byte, []int) {
+	return file_kinnekode_apicontract_document_grpc_v1_document_service_proto_rawDescGZIP(), []int{0, 0}
 }
 
-type ResumeUploadResponse struct {
+func (x *UploadDocumentRequest_Metadata) GetFileName() string {
+	if x != nil {
+		return x.FileName
+	}
+	return ""
+}
+
+type UploadDocumentRequest_Payload struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
+
+	FileChunk []byte `protobuf:"bytes,1,opt,name=file_chunk,json=fileChunk,proto3" json:"file_chunk,omitempty"`
 }
 
-func (x *ResumeUploadResponse) Reset() {
-	*x = ResumeUploadResponse{}
+func (x *UploadDocumentRequest_Payload) Reset() {
+	*x = UploadDocumentRequest_Payload{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_kinnekode_apicontract_document_grpc_v1_document_service_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -268,13 +289,13 @@ func (x *ResumeUploadResponse) Reset() {
 	}
 }
 
-func (x *ResumeUploadResponse) String() string {
+func (x *UploadDocumentRequest_Payload) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ResumeUploadResponse) ProtoMessage() {}
+func (*UploadDocumentRequest_Payload) ProtoMessage() {}
 
-func (x *ResumeUploadResponse) ProtoReflect() protoreflect.Message {
+func (x *UploadDocumentRequest_Payload) ProtoReflect() protoreflect.Message {
 	mi := &file_kinnekode_apicontract_document_grpc_v1_document_service_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -286,177 +307,14 @@ func (x *ResumeUploadResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ResumeUploadResponse.ProtoReflect.Descriptor instead.
-func (*ResumeUploadResponse) Descriptor() ([]byte, []int) {
-	return file_kinnekode_apicontract_document_grpc_v1_document_service_proto_rawDescGZIP(), []int{5}
+// Deprecated: Use UploadDocumentRequest_Payload.ProtoReflect.Descriptor instead.
+func (*UploadDocumentRequest_Payload) Descriptor() ([]byte, []int) {
+	return file_kinnekode_apicontract_document_grpc_v1_document_service_proto_rawDescGZIP(), []int{0, 1}
 }
 
-type ResumeDownloadRequest struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-}
-
-func (x *ResumeDownloadRequest) Reset() {
-	*x = ResumeDownloadRequest{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_kinnekode_apicontract_document_grpc_v1_document_service_proto_msgTypes[6]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *ResumeDownloadRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ResumeDownloadRequest) ProtoMessage() {}
-
-func (x *ResumeDownloadRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_kinnekode_apicontract_document_grpc_v1_document_service_proto_msgTypes[6]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ResumeDownloadRequest.ProtoReflect.Descriptor instead.
-func (*ResumeDownloadRequest) Descriptor() ([]byte, []int) {
-	return file_kinnekode_apicontract_document_grpc_v1_document_service_proto_rawDescGZIP(), []int{6}
-}
-
-type ResumeDownloadResponse struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-}
-
-func (x *ResumeDownloadResponse) Reset() {
-	*x = ResumeDownloadResponse{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_kinnekode_apicontract_document_grpc_v1_document_service_proto_msgTypes[7]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *ResumeDownloadResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ResumeDownloadResponse) ProtoMessage() {}
-
-func (x *ResumeDownloadResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_kinnekode_apicontract_document_grpc_v1_document_service_proto_msgTypes[7]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ResumeDownloadResponse.ProtoReflect.Descriptor instead.
-func (*ResumeDownloadResponse) Descriptor() ([]byte, []int) {
-	return file_kinnekode_apicontract_document_grpc_v1_document_service_proto_rawDescGZIP(), []int{7}
-}
-
-type FileMetadata struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	FileName string `protobuf:"bytes,1,opt,name=file_name,json=fileName,proto3" json:"file_name,omitempty"`
-}
-
-func (x *FileMetadata) Reset() {
-	*x = FileMetadata{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_kinnekode_apicontract_document_grpc_v1_document_service_proto_msgTypes[8]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *FileMetadata) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*FileMetadata) ProtoMessage() {}
-
-func (x *FileMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_kinnekode_apicontract_document_grpc_v1_document_service_proto_msgTypes[8]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use FileMetadata.ProtoReflect.Descriptor instead.
-func (*FileMetadata) Descriptor() ([]byte, []int) {
-	return file_kinnekode_apicontract_document_grpc_v1_document_service_proto_rawDescGZIP(), []int{8}
-}
-
-func (x *FileMetadata) GetFileName() string {
+func (x *UploadDocumentRequest_Payload) GetFileChunk() []byte {
 	if x != nil {
-		return x.FileName
-	}
-	return ""
-}
-
-type FilePayload struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Chunk []byte `protobuf:"bytes,1,opt,name=Chunk,proto3" json:"Chunk,omitempty"`
-}
-
-func (x *FilePayload) Reset() {
-	*x = FilePayload{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_kinnekode_apicontract_document_grpc_v1_document_service_proto_msgTypes[9]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *FilePayload) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*FilePayload) ProtoMessage() {}
-
-func (x *FilePayload) ProtoReflect() protoreflect.Message {
-	mi := &file_kinnekode_apicontract_document_grpc_v1_document_service_proto_msgTypes[9]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use FilePayload.ProtoReflect.Descriptor instead.
-func (*FilePayload) Descriptor() ([]byte, []int) {
-	return file_kinnekode_apicontract_document_grpc_v1_document_service_proto_rawDescGZIP(), []int{9}
-}
-
-func (x *FilePayload) GetChunk() []byte {
-	if x != nil {
-		return x.Chunk
+		return x.FileChunk
 	}
 	return nil
 }
@@ -470,73 +328,57 @@ var file_kinnekode_apicontract_document_grpc_v1_document_service_proto_rawDesc =
 	0x74, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12,
 	0x26, 0x6b, 0x69, 0x6e, 0x6e, 0x65, 0x6b, 0x6f, 0x64, 0x65, 0x2e, 0x61, 0x70, 0x69, 0x63, 0x6f,
 	0x6e, 0x74, 0x72, 0x61, 0x63, 0x74, 0x2e, 0x64, 0x6f, 0x63, 0x75, 0x6d, 0x65, 0x6e, 0x74, 0x2e,
-	0x67, 0x72, 0x70, 0x63, 0x2e, 0x76, 0x31, 0x22, 0xdd, 0x01, 0x0a, 0x12, 0x53, 0x74, 0x61, 0x72,
-	0x74, 0x55, 0x70, 0x6c, 0x6f, 0x61, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x5b,
-	0x0a, 0x0d, 0x66, 0x69, 0x6c, 0x65, 0x5f, 0x6d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x18,
-	0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x34, 0x2e, 0x6b, 0x69, 0x6e, 0x6e, 0x65, 0x6b, 0x6f, 0x64,
-	0x65, 0x2e, 0x61, 0x70, 0x69, 0x63, 0x6f, 0x6e, 0x74, 0x72, 0x61, 0x63, 0x74, 0x2e, 0x64, 0x6f,
-	0x63, 0x75, 0x6d, 0x65, 0x6e, 0x74, 0x2e, 0x67, 0x72, 0x70, 0x63, 0x2e, 0x76, 0x31, 0x2e, 0x46,
-	0x69, 0x6c, 0x65, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x48, 0x00, 0x52, 0x0c, 0x66,
-	0x69, 0x6c, 0x65, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x12, 0x58, 0x0a, 0x0c, 0x66,
-	0x69, 0x6c, 0x65, 0x5f, 0x70, 0x61, 0x79, 0x6c, 0x6f, 0x61, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28,
-	0x0b, 0x32, 0x33, 0x2e, 0x6b, 0x69, 0x6e, 0x6e, 0x65, 0x6b, 0x6f, 0x64, 0x65, 0x2e, 0x61, 0x70,
-	0x69, 0x63, 0x6f, 0x6e, 0x74, 0x72, 0x61, 0x63, 0x74, 0x2e, 0x64, 0x6f, 0x63, 0x75, 0x6d, 0x65,
-	0x6e, 0x74, 0x2e, 0x67, 0x72, 0x70, 0x63, 0x2e, 0x76, 0x31, 0x2e, 0x46, 0x69, 0x6c, 0x65, 0x50,
-	0x61, 0x79, 0x6c, 0x6f, 0x61, 0x64, 0x48, 0x00, 0x52, 0x0b, 0x66, 0x69, 0x6c, 0x65, 0x50, 0x61,
-	0x79, 0x6c, 0x6f, 0x61, 0x64, 0x42, 0x10, 0x0a, 0x0e, 0x75, 0x70, 0x6c, 0x6f, 0x61, 0x64, 0x5f,
-	0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x22, 0x15, 0x0a, 0x13, 0x53, 0x74, 0x61, 0x72, 0x74,
-	0x55, 0x70, 0x6c, 0x6f, 0x61, 0x64, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x16,
-	0x0a, 0x14, 0x53, 0x74, 0x61, 0x72, 0x74, 0x44, 0x6f, 0x77, 0x6e, 0x6c, 0x6f, 0x61, 0x64, 0x52,
-	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x22, 0x17, 0x0a, 0x15, 0x53, 0x74, 0x61, 0x72, 0x74, 0x44,
-	0x6f, 0x77, 0x6e, 0x6c, 0x6f, 0x61, 0x64, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22,
-	0x15, 0x0a, 0x13, 0x52, 0x65, 0x73, 0x75, 0x6d, 0x65, 0x55, 0x70, 0x6c, 0x6f, 0x61, 0x64, 0x52,
-	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x22, 0x16, 0x0a, 0x14, 0x52, 0x65, 0x73, 0x75, 0x6d, 0x65,
-	0x55, 0x70, 0x6c, 0x6f, 0x61, 0x64, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x17,
-	0x0a, 0x15, 0x52, 0x65, 0x73, 0x75, 0x6d, 0x65, 0x44, 0x6f, 0x77, 0x6e, 0x6c, 0x6f, 0x61, 0x64,
-	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x22, 0x18, 0x0a, 0x16, 0x52, 0x65, 0x73, 0x75, 0x6d,
-	0x65, 0x44, 0x6f, 0x77, 0x6e, 0x6c, 0x6f, 0x61, 0x64, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
-	0x65, 0x22, 0x2b, 0x0a, 0x0c, 0x46, 0x69, 0x6c, 0x65, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74,
-	0x61, 0x12, 0x1b, 0x0a, 0x09, 0x66, 0x69, 0x6c, 0x65, 0x5f, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01,
-	0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x66, 0x69, 0x6c, 0x65, 0x4e, 0x61, 0x6d, 0x65, 0x22, 0x23,
-	0x0a, 0x0b, 0x46, 0x69, 0x6c, 0x65, 0x50, 0x61, 0x79, 0x6c, 0x6f, 0x61, 0x64, 0x12, 0x14, 0x0a,
-	0x05, 0x43, 0x68, 0x75, 0x6e, 0x6b, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x05, 0x43, 0x68,
-	0x75, 0x6e, 0x6b, 0x32, 0xcf, 0x04, 0x0a, 0x0f, 0x44, 0x6f, 0x63, 0x75, 0x6d, 0x65, 0x6e, 0x74,
-	0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x88, 0x01, 0x0a, 0x0b, 0x53, 0x74, 0x61, 0x72,
-	0x74, 0x55, 0x70, 0x6c, 0x6f, 0x61, 0x64, 0x12, 0x3a, 0x2e, 0x6b, 0x69, 0x6e, 0x6e, 0x65, 0x6b,
+	0x67, 0x72, 0x70, 0x63, 0x2e, 0x76, 0x31, 0x1a, 0x1d, 0x6b, 0x69, 0x6e, 0x6e, 0x65, 0x6b, 0x6f,
+	0x64, 0x65, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x75, 0x75, 0x69, 0x64,
+	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0xbe, 0x02, 0x0a, 0x15, 0x55, 0x70, 0x6c, 0x6f, 0x61,
+	0x64, 0x44, 0x6f, 0x63, 0x75, 0x6d, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x12, 0x64, 0x0a, 0x08, 0x6d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x0b, 0x32, 0x46, 0x2e, 0x6b, 0x69, 0x6e, 0x6e, 0x65, 0x6b, 0x6f, 0x64, 0x65, 0x2e, 0x61,
+	0x70, 0x69, 0x63, 0x6f, 0x6e, 0x74, 0x72, 0x61, 0x63, 0x74, 0x2e, 0x64, 0x6f, 0x63, 0x75, 0x6d,
+	0x65, 0x6e, 0x74, 0x2e, 0x67, 0x72, 0x70, 0x63, 0x2e, 0x76, 0x31, 0x2e, 0x55, 0x70, 0x6c, 0x6f,
+	0x61, 0x64, 0x44, 0x6f, 0x63, 0x75, 0x6d, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x2e, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x48, 0x00, 0x52, 0x08, 0x6d, 0x65,
+	0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x12, 0x61, 0x0a, 0x07, 0x70, 0x61, 0x79, 0x6c, 0x6f, 0x61,
+	0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x45, 0x2e, 0x6b, 0x69, 0x6e, 0x6e, 0x65, 0x6b,
 	0x6f, 0x64, 0x65, 0x2e, 0x61, 0x70, 0x69, 0x63, 0x6f, 0x6e, 0x74, 0x72, 0x61, 0x63, 0x74, 0x2e,
 	0x64, 0x6f, 0x63, 0x75, 0x6d, 0x65, 0x6e, 0x74, 0x2e, 0x67, 0x72, 0x70, 0x63, 0x2e, 0x76, 0x31,
-	0x2e, 0x53, 0x74, 0x61, 0x72, 0x74, 0x55, 0x70, 0x6c, 0x6f, 0x61, 0x64, 0x52, 0x65, 0x71, 0x75,
-	0x65, 0x73, 0x74, 0x1a, 0x3b, 0x2e, 0x6b, 0x69, 0x6e, 0x6e, 0x65, 0x6b, 0x6f, 0x64, 0x65, 0x2e,
-	0x61, 0x70, 0x69, 0x63, 0x6f, 0x6e, 0x74, 0x72, 0x61, 0x63, 0x74, 0x2e, 0x64, 0x6f, 0x63, 0x75,
-	0x6d, 0x65, 0x6e, 0x74, 0x2e, 0x67, 0x72, 0x70, 0x63, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x74, 0x61,
-	0x72, 0x74, 0x55, 0x70, 0x6c, 0x6f, 0x61, 0x64, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
-	0x28, 0x01, 0x12, 0x8e, 0x01, 0x0a, 0x0d, 0x53, 0x74, 0x61, 0x72, 0x74, 0x44, 0x6f, 0x77, 0x6e,
-	0x6c, 0x6f, 0x61, 0x64, 0x12, 0x3c, 0x2e, 0x6b, 0x69, 0x6e, 0x6e, 0x65, 0x6b, 0x6f, 0x64, 0x65,
-	0x2e, 0x61, 0x70, 0x69, 0x63, 0x6f, 0x6e, 0x74, 0x72, 0x61, 0x63, 0x74, 0x2e, 0x64, 0x6f, 0x63,
-	0x75, 0x6d, 0x65, 0x6e, 0x74, 0x2e, 0x67, 0x72, 0x70, 0x63, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x74,
-	0x61, 0x72, 0x74, 0x44, 0x6f, 0x77, 0x6e, 0x6c, 0x6f, 0x61, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65,
-	0x73, 0x74, 0x1a, 0x3d, 0x2e, 0x6b, 0x69, 0x6e, 0x6e, 0x65, 0x6b, 0x6f, 0x64, 0x65, 0x2e, 0x61,
-	0x70, 0x69, 0x63, 0x6f, 0x6e, 0x74, 0x72, 0x61, 0x63, 0x74, 0x2e, 0x64, 0x6f, 0x63, 0x75, 0x6d,
-	0x65, 0x6e, 0x74, 0x2e, 0x67, 0x72, 0x70, 0x63, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x74, 0x61, 0x72,
-	0x74, 0x44, 0x6f, 0x77, 0x6e, 0x6c, 0x6f, 0x61, 0x64, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
-	0x65, 0x30, 0x01, 0x12, 0x8b, 0x01, 0x0a, 0x0c, 0x52, 0x65, 0x73, 0x75, 0x6d, 0x65, 0x55, 0x70,
-	0x6c, 0x6f, 0x61, 0x64, 0x12, 0x3b, 0x2e, 0x6b, 0x69, 0x6e, 0x6e, 0x65, 0x6b, 0x6f, 0x64, 0x65,
-	0x2e, 0x61, 0x70, 0x69, 0x63, 0x6f, 0x6e, 0x74, 0x72, 0x61, 0x63, 0x74, 0x2e, 0x64, 0x6f, 0x63,
-	0x75, 0x6d, 0x65, 0x6e, 0x74, 0x2e, 0x67, 0x72, 0x70, 0x63, 0x2e, 0x76, 0x31, 0x2e, 0x52, 0x65,
-	0x73, 0x75, 0x6d, 0x65, 0x55, 0x70, 0x6c, 0x6f, 0x61, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
-	0x74, 0x1a, 0x3c, 0x2e, 0x6b, 0x69, 0x6e, 0x6e, 0x65, 0x6b, 0x6f, 0x64, 0x65, 0x2e, 0x61, 0x70,
+	0x2e, 0x55, 0x70, 0x6c, 0x6f, 0x61, 0x64, 0x44, 0x6f, 0x63, 0x75, 0x6d, 0x65, 0x6e, 0x74, 0x52,
+	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x2e, 0x50, 0x61, 0x79, 0x6c, 0x6f, 0x61, 0x64, 0x48, 0x00,
+	0x52, 0x07, 0x70, 0x61, 0x79, 0x6c, 0x6f, 0x61, 0x64, 0x1a, 0x27, 0x0a, 0x08, 0x4d, 0x65, 0x74,
+	0x61, 0x64, 0x61, 0x74, 0x61, 0x12, 0x1b, 0x0a, 0x09, 0x66, 0x69, 0x6c, 0x65, 0x5f, 0x6e, 0x61,
+	0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x66, 0x69, 0x6c, 0x65, 0x4e, 0x61,
+	0x6d, 0x65, 0x1a, 0x28, 0x0a, 0x07, 0x50, 0x61, 0x79, 0x6c, 0x6f, 0x61, 0x64, 0x12, 0x1d, 0x0a,
+	0x0a, 0x66, 0x69, 0x6c, 0x65, 0x5f, 0x63, 0x68, 0x75, 0x6e, 0x6b, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x0c, 0x52, 0x09, 0x66, 0x69, 0x6c, 0x65, 0x43, 0x68, 0x75, 0x6e, 0x6b, 0x42, 0x09, 0x0a, 0x07,
+	0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x22, 0x53, 0x0a, 0x16, 0x55, 0x70, 0x6c, 0x6f, 0x61,
+	0x64, 0x44, 0x6f, 0x63, 0x75, 0x6d, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
+	0x65, 0x12, 0x39, 0x0a, 0x0b, 0x64, 0x6f, 0x63, 0x75, 0x6d, 0x65, 0x6e, 0x74, 0x5f, 0x69, 0x64,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x18, 0x2e, 0x6b, 0x69, 0x6e, 0x6e, 0x65, 0x6b, 0x6f,
+	0x64, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x55, 0x75, 0x69, 0x64,
+	0x52, 0x0a, 0x64, 0x6f, 0x63, 0x75, 0x6d, 0x65, 0x6e, 0x74, 0x49, 0x64, 0x22, 0x19, 0x0a, 0x17,
+	0x44, 0x6f, 0x77, 0x6e, 0x6c, 0x6f, 0x61, 0x64, 0x44, 0x6f, 0x63, 0x75, 0x6d, 0x65, 0x6e, 0x74,
+	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x22, 0x1a, 0x0a, 0x18, 0x44, 0x6f, 0x77, 0x6e, 0x6c,
+	0x6f, 0x61, 0x64, 0x44, 0x6f, 0x63, 0x75, 0x6d, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f,
+	0x6e, 0x73, 0x65, 0x32, 0xbf, 0x02, 0x0a, 0x0f, 0x44, 0x6f, 0x63, 0x75, 0x6d, 0x65, 0x6e, 0x74,
+	0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x91, 0x01, 0x0a, 0x0e, 0x55, 0x70, 0x6c, 0x6f,
+	0x61, 0x64, 0x44, 0x6f, 0x63, 0x75, 0x6d, 0x65, 0x6e, 0x74, 0x12, 0x3d, 0x2e, 0x6b, 0x69, 0x6e,
+	0x6e, 0x65, 0x6b, 0x6f, 0x64, 0x65, 0x2e, 0x61, 0x70, 0x69, 0x63, 0x6f, 0x6e, 0x74, 0x72, 0x61,
+	0x63, 0x74, 0x2e, 0x64, 0x6f, 0x63, 0x75, 0x6d, 0x65, 0x6e, 0x74, 0x2e, 0x67, 0x72, 0x70, 0x63,
+	0x2e, 0x76, 0x31, 0x2e, 0x55, 0x70, 0x6c, 0x6f, 0x61, 0x64, 0x44, 0x6f, 0x63, 0x75, 0x6d, 0x65,
+	0x6e, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x3e, 0x2e, 0x6b, 0x69, 0x6e, 0x6e,
+	0x65, 0x6b, 0x6f, 0x64, 0x65, 0x2e, 0x61, 0x70, 0x69, 0x63, 0x6f, 0x6e, 0x74, 0x72, 0x61, 0x63,
+	0x74, 0x2e, 0x64, 0x6f, 0x63, 0x75, 0x6d, 0x65, 0x6e, 0x74, 0x2e, 0x67, 0x72, 0x70, 0x63, 0x2e,
+	0x76, 0x31, 0x2e, 0x55, 0x70, 0x6c, 0x6f, 0x61, 0x64, 0x44, 0x6f, 0x63, 0x75, 0x6d, 0x65, 0x6e,
+	0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x28, 0x01, 0x12, 0x97, 0x01, 0x0a, 0x10,
+	0x44, 0x6f, 0x77, 0x6e, 0x6c, 0x6f, 0x61, 0x64, 0x44, 0x6f, 0x63, 0x75, 0x6d, 0x65, 0x6e, 0x74,
+	0x12, 0x3f, 0x2e, 0x6b, 0x69, 0x6e, 0x6e, 0x65, 0x6b, 0x6f, 0x64, 0x65, 0x2e, 0x61, 0x70, 0x69,
+	0x63, 0x6f, 0x6e, 0x74, 0x72, 0x61, 0x63, 0x74, 0x2e, 0x64, 0x6f, 0x63, 0x75, 0x6d, 0x65, 0x6e,
+	0x74, 0x2e, 0x67, 0x72, 0x70, 0x63, 0x2e, 0x76, 0x31, 0x2e, 0x44, 0x6f, 0x77, 0x6e, 0x6c, 0x6f,
+	0x61, 0x64, 0x44, 0x6f, 0x63, 0x75, 0x6d, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x1a, 0x40, 0x2e, 0x6b, 0x69, 0x6e, 0x6e, 0x65, 0x6b, 0x6f, 0x64, 0x65, 0x2e, 0x61, 0x70,
 	0x69, 0x63, 0x6f, 0x6e, 0x74, 0x72, 0x61, 0x63, 0x74, 0x2e, 0x64, 0x6f, 0x63, 0x75, 0x6d, 0x65,
-	0x6e, 0x74, 0x2e, 0x67, 0x72, 0x70, 0x63, 0x2e, 0x76, 0x31, 0x2e, 0x52, 0x65, 0x73, 0x75, 0x6d,
-	0x65, 0x55, 0x70, 0x6c, 0x6f, 0x61, 0x64, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x28,
-	0x01, 0x12, 0x91, 0x01, 0x0a, 0x0e, 0x52, 0x65, 0x73, 0x75, 0x6d, 0x65, 0x44, 0x6f, 0x77, 0x6e,
-	0x6c, 0x6f, 0x61, 0x64, 0x12, 0x3d, 0x2e, 0x6b, 0x69, 0x6e, 0x6e, 0x65, 0x6b, 0x6f, 0x64, 0x65,
-	0x2e, 0x61, 0x70, 0x69, 0x63, 0x6f, 0x6e, 0x74, 0x72, 0x61, 0x63, 0x74, 0x2e, 0x64, 0x6f, 0x63,
-	0x75, 0x6d, 0x65, 0x6e, 0x74, 0x2e, 0x67, 0x72, 0x70, 0x63, 0x2e, 0x76, 0x31, 0x2e, 0x52, 0x65,
-	0x73, 0x75, 0x6d, 0x65, 0x44, 0x6f, 0x77, 0x6e, 0x6c, 0x6f, 0x61, 0x64, 0x52, 0x65, 0x71, 0x75,
-	0x65, 0x73, 0x74, 0x1a, 0x3e, 0x2e, 0x6b, 0x69, 0x6e, 0x6e, 0x65, 0x6b, 0x6f, 0x64, 0x65, 0x2e,
-	0x61, 0x70, 0x69, 0x63, 0x6f, 0x6e, 0x74, 0x72, 0x61, 0x63, 0x74, 0x2e, 0x64, 0x6f, 0x63, 0x75,
-	0x6d, 0x65, 0x6e, 0x74, 0x2e, 0x67, 0x72, 0x70, 0x63, 0x2e, 0x76, 0x31, 0x2e, 0x52, 0x65, 0x73,
-	0x75, 0x6d, 0x65, 0x44, 0x6f, 0x77, 0x6e, 0x6c, 0x6f, 0x61, 0x64, 0x52, 0x65, 0x73, 0x70, 0x6f,
+	0x6e, 0x74, 0x2e, 0x67, 0x72, 0x70, 0x63, 0x2e, 0x76, 0x31, 0x2e, 0x44, 0x6f, 0x77, 0x6e, 0x6c,
+	0x6f, 0x61, 0x64, 0x44, 0x6f, 0x63, 0x75, 0x6d, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f,
 	0x6e, 0x73, 0x65, 0x30, 0x01, 0x42, 0x52, 0x5a, 0x50, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e,
 	0x63, 0x6f, 0x6d, 0x2f, 0x6b, 0x69, 0x6e, 0x6e, 0x65, 0x6b, 0x6f, 0x2d, 0x64, 0x65, 0x2f, 0x61,
 	0x70, 0x69, 0x2d, 0x63, 0x6f, 0x6e, 0x74, 0x72, 0x61, 0x63, 0x74, 0x2f, 0x67, 0x6f, 0x6c, 0x61,
@@ -558,35 +400,29 @@ func file_kinnekode_apicontract_document_grpc_v1_document_service_proto_rawDescG
 	return file_kinnekode_apicontract_document_grpc_v1_document_service_proto_rawDescData
 }
 
-var file_kinnekode_apicontract_document_grpc_v1_document_service_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
+var file_kinnekode_apicontract_document_grpc_v1_document_service_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_kinnekode_apicontract_document_grpc_v1_document_service_proto_goTypes = []interface{}{
-	(*StartUploadRequest)(nil),     // 0: kinnekode.apicontract.document.grpc.v1.StartUploadRequest
-	(*StartUploadResponse)(nil),    // 1: kinnekode.apicontract.document.grpc.v1.StartUploadResponse
-	(*StartDownloadRequest)(nil),   // 2: kinnekode.apicontract.document.grpc.v1.StartDownloadRequest
-	(*StartDownloadResponse)(nil),  // 3: kinnekode.apicontract.document.grpc.v1.StartDownloadResponse
-	(*ResumeUploadRequest)(nil),    // 4: kinnekode.apicontract.document.grpc.v1.ResumeUploadRequest
-	(*ResumeUploadResponse)(nil),   // 5: kinnekode.apicontract.document.grpc.v1.ResumeUploadResponse
-	(*ResumeDownloadRequest)(nil),  // 6: kinnekode.apicontract.document.grpc.v1.ResumeDownloadRequest
-	(*ResumeDownloadResponse)(nil), // 7: kinnekode.apicontract.document.grpc.v1.ResumeDownloadResponse
-	(*FileMetadata)(nil),           // 8: kinnekode.apicontract.document.grpc.v1.FileMetadata
-	(*FilePayload)(nil),            // 9: kinnekode.apicontract.document.grpc.v1.FilePayload
+	(*UploadDocumentRequest)(nil),          // 0: kinnekode.apicontract.document.grpc.v1.UploadDocumentRequest
+	(*UploadDocumentResponse)(nil),         // 1: kinnekode.apicontract.document.grpc.v1.UploadDocumentResponse
+	(*DownloadDocumentRequest)(nil),        // 2: kinnekode.apicontract.document.grpc.v1.DownloadDocumentRequest
+	(*DownloadDocumentResponse)(nil),       // 3: kinnekode.apicontract.document.grpc.v1.DownloadDocumentResponse
+	(*UploadDocumentRequest_Metadata)(nil), // 4: kinnekode.apicontract.document.grpc.v1.UploadDocumentRequest.Metadata
+	(*UploadDocumentRequest_Payload)(nil),  // 5: kinnekode.apicontract.document.grpc.v1.UploadDocumentRequest.Payload
+	(*protobuf.Uuid)(nil),                  // 6: kinnekode.protobuf.Uuid
 }
 var file_kinnekode_apicontract_document_grpc_v1_document_service_proto_depIdxs = []int32{
-	8, // 0: kinnekode.apicontract.document.grpc.v1.StartUploadRequest.file_metadata:type_name -> kinnekode.apicontract.document.grpc.v1.FileMetadata
-	9, // 1: kinnekode.apicontract.document.grpc.v1.StartUploadRequest.file_payload:type_name -> kinnekode.apicontract.document.grpc.v1.FilePayload
-	0, // 2: kinnekode.apicontract.document.grpc.v1.DocumentService.StartUpload:input_type -> kinnekode.apicontract.document.grpc.v1.StartUploadRequest
-	2, // 3: kinnekode.apicontract.document.grpc.v1.DocumentService.StartDownload:input_type -> kinnekode.apicontract.document.grpc.v1.StartDownloadRequest
-	4, // 4: kinnekode.apicontract.document.grpc.v1.DocumentService.ResumeUpload:input_type -> kinnekode.apicontract.document.grpc.v1.ResumeUploadRequest
-	6, // 5: kinnekode.apicontract.document.grpc.v1.DocumentService.ResumeDownload:input_type -> kinnekode.apicontract.document.grpc.v1.ResumeDownloadRequest
-	1, // 6: kinnekode.apicontract.document.grpc.v1.DocumentService.StartUpload:output_type -> kinnekode.apicontract.document.grpc.v1.StartUploadResponse
-	3, // 7: kinnekode.apicontract.document.grpc.v1.DocumentService.StartDownload:output_type -> kinnekode.apicontract.document.grpc.v1.StartDownloadResponse
-	5, // 8: kinnekode.apicontract.document.grpc.v1.DocumentService.ResumeUpload:output_type -> kinnekode.apicontract.document.grpc.v1.ResumeUploadResponse
-	7, // 9: kinnekode.apicontract.document.grpc.v1.DocumentService.ResumeDownload:output_type -> kinnekode.apicontract.document.grpc.v1.ResumeDownloadResponse
-	6, // [6:10] is the sub-list for method output_type
-	2, // [2:6] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	4, // 0: kinnekode.apicontract.document.grpc.v1.UploadDocumentRequest.metadata:type_name -> kinnekode.apicontract.document.grpc.v1.UploadDocumentRequest.Metadata
+	5, // 1: kinnekode.apicontract.document.grpc.v1.UploadDocumentRequest.payload:type_name -> kinnekode.apicontract.document.grpc.v1.UploadDocumentRequest.Payload
+	6, // 2: kinnekode.apicontract.document.grpc.v1.UploadDocumentResponse.document_id:type_name -> kinnekode.protobuf.Uuid
+	0, // 3: kinnekode.apicontract.document.grpc.v1.DocumentService.UploadDocument:input_type -> kinnekode.apicontract.document.grpc.v1.UploadDocumentRequest
+	2, // 4: kinnekode.apicontract.document.grpc.v1.DocumentService.DownloadDocument:input_type -> kinnekode.apicontract.document.grpc.v1.DownloadDocumentRequest
+	1, // 5: kinnekode.apicontract.document.grpc.v1.DocumentService.UploadDocument:output_type -> kinnekode.apicontract.document.grpc.v1.UploadDocumentResponse
+	3, // 6: kinnekode.apicontract.document.grpc.v1.DocumentService.DownloadDocument:output_type -> kinnekode.apicontract.document.grpc.v1.DownloadDocumentResponse
+	5, // [5:7] is the sub-list for method output_type
+	3, // [3:5] is the sub-list for method input_type
+	3, // [3:3] is the sub-list for extension type_name
+	3, // [3:3] is the sub-list for extension extendee
+	0, // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_kinnekode_apicontract_document_grpc_v1_document_service_proto_init() }
@@ -596,7 +432,7 @@ func file_kinnekode_apicontract_document_grpc_v1_document_service_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_kinnekode_apicontract_document_grpc_v1_document_service_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StartUploadRequest); i {
+			switch v := v.(*UploadDocumentRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -608,7 +444,7 @@ func file_kinnekode_apicontract_document_grpc_v1_document_service_proto_init() {
 			}
 		}
 		file_kinnekode_apicontract_document_grpc_v1_document_service_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StartUploadResponse); i {
+			switch v := v.(*UploadDocumentResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -620,7 +456,7 @@ func file_kinnekode_apicontract_document_grpc_v1_document_service_proto_init() {
 			}
 		}
 		file_kinnekode_apicontract_document_grpc_v1_document_service_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StartDownloadRequest); i {
+			switch v := v.(*DownloadDocumentRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -632,7 +468,7 @@ func file_kinnekode_apicontract_document_grpc_v1_document_service_proto_init() {
 			}
 		}
 		file_kinnekode_apicontract_document_grpc_v1_document_service_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StartDownloadResponse); i {
+			switch v := v.(*DownloadDocumentResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -644,7 +480,7 @@ func file_kinnekode_apicontract_document_grpc_v1_document_service_proto_init() {
 			}
 		}
 		file_kinnekode_apicontract_document_grpc_v1_document_service_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ResumeUploadRequest); i {
+			switch v := v.(*UploadDocumentRequest_Metadata); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -656,55 +492,7 @@ func file_kinnekode_apicontract_document_grpc_v1_document_service_proto_init() {
 			}
 		}
 		file_kinnekode_apicontract_document_grpc_v1_document_service_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ResumeUploadResponse); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_kinnekode_apicontract_document_grpc_v1_document_service_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ResumeDownloadRequest); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_kinnekode_apicontract_document_grpc_v1_document_service_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ResumeDownloadResponse); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_kinnekode_apicontract_document_grpc_v1_document_service_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*FileMetadata); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_kinnekode_apicontract_document_grpc_v1_document_service_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*FilePayload); i {
+			switch v := v.(*UploadDocumentRequest_Payload); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -717,8 +505,8 @@ func file_kinnekode_apicontract_document_grpc_v1_document_service_proto_init() {
 		}
 	}
 	file_kinnekode_apicontract_document_grpc_v1_document_service_proto_msgTypes[0].OneofWrappers = []interface{}{
-		(*StartUploadRequest_FileMetadata)(nil),
-		(*StartUploadRequest_FilePayload)(nil),
+		(*UploadDocumentRequest_Metadata_)(nil),
+		(*UploadDocumentRequest_Payload_)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -726,7 +514,7 @@ func file_kinnekode_apicontract_document_grpc_v1_document_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_kinnekode_apicontract_document_grpc_v1_document_service_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   10,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
