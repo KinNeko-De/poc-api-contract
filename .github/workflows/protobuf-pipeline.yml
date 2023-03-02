@@ -10,7 +10,7 @@ on:
 env:
   MAJOR_MINOR_PATCH: 0.1.0
   SOLUTION: dotnet/protobuf/KinNekoDe.Protobuf.sln
-  MODULE: github.com/kinneko-de/test-api-contract/golang/kinnekode/protobuf
+  MODULE: golang/kinnekode/protobuf
   
 concurrency: ci-${{ github.ref }}
 
