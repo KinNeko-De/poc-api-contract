@@ -3,7 +3,7 @@ module github.com/kinneko-de/test-api-contract/golang/kinnekode/apicontract/docu
 go 1.19
 
 require (
-	github.com/kinneko-de/test-api-contract/golang/kinnekode/protobuf v0.0.0-20230302105909-9ce5e6c74c7d
+	github.com/kinneko-de/test-api-contract/golang/kinnekode/protobuf v0.1.0
 	google.golang.org/grpc v1.53.0
 	google.golang.org/protobuf v1.28.1
 )
