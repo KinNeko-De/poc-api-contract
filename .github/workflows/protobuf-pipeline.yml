@@ -8,9 +8,9 @@ on:
       - '!**/**.md'
       - '!docs/**'
 env:
-  MAJOR_MINOR_PATCH: 0.1.3
+  MAJOR_MINOR_PATCH: 0.1.4
   SOLUTION: dotnet/protobuf/KinNekoDe.Protobuf.sln
-  MODULE: golang/kinnekode/protobuf
+  MODULE: kinnekode/protobuf
   
 concurrency: ci-${{ github.ref }}
 
