@@ -86,7 +86,7 @@ jobs:
           github.rest.git.createRef({
             owner: context.repo.owner,
             repo: context.repo.repo,
-            ref: "refs/tags/${MODULE}/v${{ steps.semantic_version.outputs.semantic_version }}",
+            ref: "refs/tags/${{ MODULE }}/v${{ steps.semantic_version.outputs.semantic_version }}",
             sha: context.sha
           })
     - name: Publish
