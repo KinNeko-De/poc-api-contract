@@ -10,6 +10,7 @@ on:
 env:
   MAJOR_MINOR_PATCH: 0.1.0
   SOLUTION: dotnet/protobuf/KinNekoDe.Protobuf.sln
+  MODULE: github.com/kinneko-de/test-api-contract/golang/kinnekode/protobuf
   
 concurrency: ci-${{ github.ref }}
 
@@ -78,15 +79,15 @@ jobs:
     - name: Pack
       run: |
         dotnet pack ${{ env.SOLUTION }} --no-restore --no-build -c Release ${{ steps.dotnet.outputs.parameters }}
+    - name: Create semantic versioning git tag
+      uses: actions/github-script@v6
+      with:
+        script: |
+          github.rest.git.createRef({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            ref: "refs/tags/${MODULE}/v${{ steps.semantic_version.outputs.semantic_version }}",
+            sha: context.sha
+          })
     - name: Publish
       run: dotnet nuget push **\**.nupkg --source "https://nuget.pkg.github.com/KinNeko-De" --api-key ${{ secrets.GITHUB_TOKEN }} --skip-duplicate
-    #- name: Create semantic versioning git tag
-    #  uses: actions/github-script@v6
-    #  with:
-    #    script: |
-    #      github.rest.git.createRef({
-    #        owner: context.repo.owner,
-    #        repo: context.repo.repo,
-    #        ref: "refs/tags/${{ steps.semantic_version.outputs.semantic_version }}",
-    #        sha: context.sha
-    #      })
