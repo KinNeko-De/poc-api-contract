@@ -11,7 +11,7 @@ env:
   MAJOR_MINOR_PATCH: 0.1.6
   DOTNET_SOLUTION: dotnet/protobuf/KinNekoDe.Protobuf.sln
   GOLANG_MODULE: golang/kinnekode/protobuf
-  
+
 concurrency: ci-${{ github.ref }}
 
 name: apicontract-protobuf
@@ -69,6 +69,10 @@ jobs:
           cd ${{ env.GOLANG_MODULE}}
           go build
       # dotnet
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: 7.x
       - name: Set dotnet parameter
         id: dotnet
         run: |
@@ -79,20 +83,16 @@ jobs:
           fi
           echo 'parameters' ${ARGS[@]}
           echo "parameters=${ARGS[@]}" >> $GITHUB_OUTPUT
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v2
-        with:
-          dotnet-version: 7.x
-      - name: Restore dependencies
+      - name: Restore dependencies for .NET
         run: dotnet restore ${{ env.DOTNET_SOLUTION }}
-      - name: Build
+      - name: Build .NET
         run: |
          dotnet build ${{ env.DOTNET_SOLUTION }} --no-restore -c Release ${{ steps.dotnet.outputs.parameters }}
-      - name: Pack
+      - name: Pack .NET
         run: |
           dotnet pack ${{ env.DOTNET_SOLUTION }} --no-restore --no-build -c Release ${{ steps.dotnet.outputs.parameters }}
       # publish api
-      - name: Publish nuget for dotnet
+      - name: Publish nuget for .NET
         run: dotnet nuget push **\**.nupkg --source "https://nuget.pkg.github.com/KinNeko-De" --api-key ${{ secrets.GITHUB_TOKEN }}
       - name: Create semantic versioning git tag for golang
         uses: actions/github-script@v6
