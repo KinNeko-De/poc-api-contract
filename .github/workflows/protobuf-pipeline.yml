@@ -17,8 +17,8 @@ concurrency: ci-${{ github.ref }}
 name: apicontract-protobuf
 
 jobs:
-  version_number:
-    name: "Determine version number"
+  publish:
+    name: "Publish api"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -36,7 +36,7 @@ jobs:
               USE=false
               SUFFIX=''
               EXTENSION=''
-            else
+          else
               echo 'for feature branch pipeline'
               USE=true
               SUFFIX=${GITHUB_REF##*/}.${{github.run_number}}
@@ -57,11 +57,7 @@ jobs:
           echo 'SEMANTIC_VERSION: ' $SEMANTIC_VERSION
           echo "semantic_version=$SEMANTIC_VERSION" >> $GITHUB_OUTPUT
           echo "major_minor_patch=$MAJOR_MINOR_PATCH" >> $GITHUB_OUTPUT
-  golang:
-    needs: version_number
-    name: "Provide golang api"
-    runs-on: ubuntu-latest
-    steps:
+      # golang
       - name: Install go
         uses: actions/setup-go@v3
         with:
@@ -71,12 +67,8 @@ jobs:
       - name: "Build go api"
         run: |
           cd ${{ env.GOLANG_MODULE}}
-          go build 
-  dotnet: 
-    needs: version_number
-    name: "Provide dotnet api"
-    runs-on: ubuntu-latest
-    steps:
+          go build
+      # dotnet
       - name: Set dotnet parameter
         id: dotnet
         run: |
@@ -99,12 +91,8 @@ jobs:
       - name: Pack
         run: |
           dotnet pack ${{ env.DOTNET_SOLUTION }} --no-restore --no-build -c Release ${{ steps.dotnet.outputs.parameters }}
-  publish:
-    name: "Publish api"
-    needs: [version_number, golang, dotnet]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Publish
+      # publish api
+      - name: Publish nuget for dotnet
         run: dotnet nuget push **\**.nupkg --source "https://nuget.pkg.github.com/KinNeko-De" --api-key ${{ secrets.GITHUB_TOKEN }}
       - name: Create semantic versioning git tag for golang
         uses: actions/github-script@v6
