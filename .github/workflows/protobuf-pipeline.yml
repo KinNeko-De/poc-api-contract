@@ -57,21 +57,21 @@ jobs:
           echo 'SEMANTIC_VERSION: ' $SEMANTIC_VERSION
           echo "semantic_version=$SEMANTIC_VERSION" >> $GITHUB_OUTPUT
           echo "major_minor_patch=$MAJOR_MINOR_PATCH" >> $GITHUB_OUTPUT
-  golang:
-    needs: version_number
-    name: "Provide golang api"
-    runs-on: ubuntu-latest
-    steps:
-      - name: Install go
-        uses: actions/setup-go@v3
-        with:
-          go-version: '^1.19.0'
-      - name: "Installed go version
-        run: go version
-      - name: "Build go api"
-        run: |
-          cd ${{ env.GOLANG_MODULE}}
-          go build 
+  #golang:
+  #  needs: version_number
+  #  name: "Provide golang api"
+  #  runs-on: ubuntu-latest
+  #  steps:
+  #    - name: Install go
+  #      uses: actions/setup-go@v3
+  #      with:
+  #        go-version: '^1.19.0'
+  #    - name: "Installed go version
+  #      run: go version
+  #    - name: "Build go api"
+  #      run: |
+  #        cd ${{ env.GOLANG_MODULE}}
+  #        go build 
   dotnet: 
     needs: version_number
     name: "Provide dotnet api"
