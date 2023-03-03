@@ -8,7 +8,7 @@ on:
       - '!**/**.md'
       - '!docs/**'
 env:
-  MAJOR_MINOR_PATCH: 0.1.7
+  MAJOR_MINOR_PATCH: 0.1.8
   DOTNET_SOLUTION: dotnet/protobuf/KinNekoDe.Protobuf.sln
   GOLANG_MODULE: golang/kinnekode/protobuf
 
@@ -67,7 +67,7 @@ jobs:
       - name: "Build go api"
         run: |
           cd ${{ env.GOLANG_MODULE}}
-          go build
+          go build ./...
       # dotnet
       - name: Setup .NET
         uses: actions/setup-dotnet@v2

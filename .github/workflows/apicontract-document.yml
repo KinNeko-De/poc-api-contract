@@ -8,7 +8,7 @@ on:
       - '!**/**.md'
       - '!docs/**'
 env:
-  MAJOR_MINOR_PATCH: 0.1.1
+  MAJOR_MINOR_PATCH: 0.1.2
   SOLUTION: dotnet/apicontract/document/KinNekoDe.ApiContract.Document.sln
   GOLANG_MODULE: golang/kinnekode/apicontract/document
 
@@ -67,7 +67,7 @@ jobs:
       - name: "Build go api"
         run: |
           cd ${{ env.GOLANG_MODULE}}
-          go build
+          go build ./...
       # dotnet
       - name: Setup .NET
         uses: actions/setup-dotnet@v2
