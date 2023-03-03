@@ -9,7 +9,7 @@ on:
       - '!docs/**'
 env:
   MAJOR_MINOR_PATCH: 0.1.2
-  SOLUTION: dotnet/apicontract/document/KinNekoDe.ApiContract.Document.sln
+  DOTNET_SOLUTION: dotnet/apicontract/document/KinNekoDe.ApiContract.Document.sln
   GOLANG_MODULE: golang/kinnekode/apicontract/document
 
 concurrency: ci-${{ github.ref }}
