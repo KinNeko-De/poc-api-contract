@@ -31,7 +31,19 @@ message UploadDocumentResponse {
 }
 
 message DownloadDocumentRequest {
+    kinnekode.protobuf.Uuid document_id = 1;
 }
 
 message DownloadDocumentResponse {
+  oneof content {
+    Metadata metadata = 1;
+    Payload payload = 2;
+  }
+
+  message Metadata {
+  }
+
+  message Payload {
+    bytes file_chunk = 1;
+  }
 }
