@@ -1,4 +1,4 @@
-module github.com/kinneko-de/test-api-contract/golang/kinnekode/apicontract/document
+module github.com/kinneko-de/test-api-contract/golang/kinnekode/document
 
 go 1.19
 

@@ -8,8 +8,8 @@
     <Product>KinNekoDe</Product>
     <PackageType>Dependency</PackageType>
     <VersionPrefix>0.1.0</VersionPrefix>
-    <PackageId>kinnekode.protobuf</PackageId>
-    <Title>KinNekoDe.ApiContract.Restaurant</Title>
+    <PackageId>kinnekode.apicontract.protobuf</PackageId>
+    <Title>KinNekoDe.ApiContract.Protobuf</Title>
     <Authors>Nils Diekmann</Authors>
     <Description>Api contract specified in protobuf.</Description>
     <Summary>Api contract specified in protobuf.</Summary>

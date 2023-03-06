@@ -9,7 +9,7 @@ on:
       - '!docs/**'
 env:
   MAJOR_MINOR_PATCH: 0.2.0
-  DOTNET_SOLUTION: dotnet/protobuf/KinNekoDe.Protobuf.sln
+  DOTNET_SOLUTION: dotnet/protobuf/KinNekoDe.ApiContract.Protobuf.sln
   GOLANG_MODULE: golang/kinnekode/protobuf
 
 concurrency: ci-${{ github.ref }}

@@ -1,16 +1,16 @@
 on:
   push:
     paths:
-      - '.github/workflows/apicontract-document.yml'
-      - 'protos/kinnekode/apicontract/document/**'
-      - 'dotnet/apicontract/document/**'
-      - 'golang/kinnekode/apicontract/document/**'
+      - '.github/workflows/document-pipeline.yml'
+      - 'protos/kinnekode/document/**'
+      - 'dotnet/document/**'
+      - 'golang/kinnekode/document/**'
       - '!**/**.md'
       - '!docs/**'
 env:
   MAJOR_MINOR_PATCH: 0.1.4
   DOTNET_SOLUTION: dotnet/apicontract/document/KinNekoDe.ApiContract.Document.sln
-  GOLANG_MODULE: golang/kinnekode/apicontract/document
+  GOLANG_MODULE: golang/kinnekode/document
 
 concurrency: ci-${{ github.ref }}
 

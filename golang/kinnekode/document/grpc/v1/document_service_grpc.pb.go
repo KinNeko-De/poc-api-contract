@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.2.0
 // - protoc             v4.22.0
-// source: kinnekode/apicontract/document/grpc/v1/document_service.proto
+// source: kinnekode/document/grpc/v1/document_service.proto
 
 package v1
 
@@ -198,5 +198,5 @@ var DocumentService_ServiceDesc = grpc.ServiceDesc{
 			ServerStreams: true,
 		},
 	},
-	Metadata: "kinnekode/apicontract/document/grpc/v1/document_service.proto",
+	Metadata: "kinnekode/document/grpc/v1/document_service.proto",
 }
