@@ -5,6 +5,8 @@ import "kinnekode/restaurant/something.proto";
 
 package kinnekode.restaurant.test;
 
+option go_package = "github.com/kinneko-de/test-api-contract/golang/kinnekode/document/test";
+
 message Test {
   kinnekode.protobuf.Uuid id = 1;
   kinnekode.restaurant.Restaurant restaurant = 2;

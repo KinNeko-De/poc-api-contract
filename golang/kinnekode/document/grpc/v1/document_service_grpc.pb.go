@@ -35,7 +35,7 @@ func NewDocumentServiceClient(cc grpc.ClientConnInterface) DocumentServiceClient
 }
 
 func (c *documentServiceClient) UploadDocument(ctx context.Context, opts ...grpc.CallOption) (DocumentService_UploadDocumentClient, error) {
-	stream, err := c.cc.NewStream(ctx, &DocumentService_ServiceDesc.Streams[0], "/kinnekode.apicontract.document.grpc.v1.DocumentService/UploadDocument", opts...)
+	stream, err := c.cc.NewStream(ctx, &DocumentService_ServiceDesc.Streams[0], "/kinnekode.document.grpc.v1.DocumentService/UploadDocument", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -69,7 +69,7 @@ func (x *documentServiceUploadDocumentClient) CloseAndRecv() (*UploadDocumentRes
 }
 
 func (c *documentServiceClient) DownloadDocument(ctx context.Context, in *DownloadDocumentRequest, opts ...grpc.CallOption) (DocumentService_DownloadDocumentClient, error) {
-	stream, err := c.cc.NewStream(ctx, &DocumentService_ServiceDesc.Streams[1], "/kinnekode.apicontract.document.grpc.v1.DocumentService/DownloadDocument", opts...)
+	stream, err := c.cc.NewStream(ctx, &DocumentService_ServiceDesc.Streams[1], "/kinnekode.document.grpc.v1.DocumentService/DownloadDocument", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -183,7 +183,7 @@ func (x *documentServiceDownloadDocumentServer) Send(m *DownloadDocumentResponse
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var DocumentService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "kinnekode.apicontract.document.grpc.v1.DocumentService",
+	ServiceName: "kinnekode.document.grpc.v1.DocumentService",
 	HandlerType: (*DocumentServiceServer)(nil),
 	Methods:     []grpc.MethodDesc{},
 	Streams: []grpc.StreamDesc{

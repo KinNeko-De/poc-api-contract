@@ -8,7 +8,7 @@ on:
       - '!**/**.md'
       - '!docs/**'
 env:
-  MAJOR_MINOR_PATCH: 0.2.0
+  MAJOR_MINOR_PATCH: 0.2.1
   DOTNET_SOLUTION: dotnet/document/KinNekoDe.ApiContract.Document.sln
   GOLANG_MODULE: golang/kinnekode/document
 
