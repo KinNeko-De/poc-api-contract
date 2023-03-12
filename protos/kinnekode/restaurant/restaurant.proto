@@ -2,7 +2,7 @@ syntax = "proto3";
 
 import "kinnekode/protobuf/uuid.proto";
 
-package kinnekode.apicontract.something;
+package kinnekode.restaurant;
 
 message RestaurantV2 {
   kinnekode.protobuf.Uuid id = 1;

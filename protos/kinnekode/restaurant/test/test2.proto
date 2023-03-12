@@ -1,11 +1,11 @@
 syntax = "proto3";
 
 import "kinnekode/protobuf/uuid.proto";
-import "kinnekode/apicontract/restaurant/something.proto";
+import "kinnekode/restaurant/something.proto";
 
-package kinnekode.apicontract.restaurant;
+package kinnekode.restaurant.test;
 
 message Test {
   kinnekode.protobuf.Uuid id = 1;
-  kinnekode.apicontract.something.Restaurant restaurant = 2;
+  kinnekode.restaurant.Restaurant restaurant = 2;
 }
