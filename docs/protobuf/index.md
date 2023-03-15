@@ -6,9 +6,6 @@
 - [kinnekode/protobuf/uuid.proto](#kinnekode_protobuf_uuid-proto)
     - [Uuid](#kinnekode-protobuf-Uuid)
   
-- [kinnekode/protobuf/uuid.proto](#kinnekode_protobuf_uuid-proto)
-    - [Uuid](#kinnekode-protobuf-Uuid)
-  
 - [google/protobuf/any.proto](#google_protobuf_any-proto)
     - [Any](#google-protobuf-Any)
   
@@ -102,39 +99,6 @@
     - [UInt64Value](#google-protobuf-UInt64Value)
   
 - [Scalar Value Types](#scalar-value-types)
-
-
-
-<a name="kinnekode_protobuf_uuid-proto"></a>
-<p align="right"><a href="#top">Top</a></p>
-
-## kinnekode/protobuf/uuid.proto
-
-
-
-<a name="kinnekode-protobuf-Uuid"></a>
-
-### Uuid
-Universally Unique Identifier (https://www.rfc-editor.org/rfc/rfc4122)
-
-Example: 550e8400-e29b-11d4-a716-446655440000
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| value | [string](#string) |  |  |
-
-
-
-
-
- 
-
- 
-
- 
-
- 
 
 
 
