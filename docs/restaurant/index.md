@@ -217,7 +217,7 @@
 ### Uuid
 Universally Unique Identifier (https://www.rfc-editor.org/rfc/rfc4122)
 
-example: 550e8400-e29b-11d4-a716-446655440000
+Example: 550e8400-e29b-11d4-a716-446655440000
 
 
 | Field | Type | Label | Description |
