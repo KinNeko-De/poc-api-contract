@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+import "kinnekode/protobuf/uuid.proto";
+
+package kinnekode.restaurant.document;
+
+option go_package = "github.com/kinneko-de/test-api-contract/golang/kinnekode/document/document";
+
+message GenerateDocumentV1 {
+  kinnekode.protobuf.Uuid request_id = 1;
+}
