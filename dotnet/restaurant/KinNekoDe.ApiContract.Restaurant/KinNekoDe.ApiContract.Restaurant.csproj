@@ -39,7 +39,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="kinnekode.apicontract.protobuf" Version="0.2.*" />
+    <PackageReference Include="kinnekode.apicontract.protobuf" Version="0.2.1-document-request.46-document-request.46" />
   </ItemGroup>
 
   <ItemGroup>
