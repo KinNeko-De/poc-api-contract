@@ -6,6 +6,8 @@ github.com/google/go-cmp v0.5.5/go.mod h1:v8dTdLbMG2kIc/vJvl+f65V22dbkXbowE6jgT/
 github.com/google/go-cmp v0.5.9 h1:O2Tfq5qg4qc4AmwVlvv0oLiVAGB7enBSJ2x2DqQFi38=
 github.com/google/uuid v1.3.0 h1:t6JiXgmwXMjEs8VusXIJk2BXHsn+wx8BZdTaoZ5fu7I=
 github.com/google/uuid v1.3.0/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
+github.com/kinneko-de/test-api-contract/golang/kinnekode/protobuf v0.2.1-document-request.46 h1:bfNfj2pJAl4tEb5hy1OkkX8twtEHiuMWurm5QpfgNAQ=
+github.com/kinneko-de/test-api-contract/golang/kinnekode/protobuf v0.2.1-document-request.46/go.mod h1:G2yA2toZ+TvbcvIriZCEdxCn3534i8Scf/kTjyQ5tFw=
 github.com/kinneko-de/test-api-contract/golang/kinnekode/protobuf v0.2.1 h1:AMHtpXKFDSaD/PZYf8tDkAclUrgpeh1QsdVDvoCKM9o=
 github.com/kinneko-de/test-api-contract/golang/kinnekode/protobuf v0.2.1/go.mod h1:G2yA2toZ+TvbcvIriZCEdxCn3534i8Scf/kTjyQ5tFw=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
