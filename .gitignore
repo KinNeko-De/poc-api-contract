@@ -370,3 +370,5 @@ FodyWeavers.xsd
 go.work
 go.work.sum
 
+# Goland
+.idea
