@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package kinnekode.restaurant.document;
+
+option go_package = "github.com/kinneko-de/test-api-contract/golang/kinnekode/restaurant/document";
+
+// Reply to request GenerateDocumentV1 defined in generate_document.proto
+message DocumentGeneratedV1 {
+  // TODO Define results according to Enterprise Integration Patterns
+}

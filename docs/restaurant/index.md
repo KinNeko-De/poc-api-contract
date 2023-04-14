@@ -3,14 +3,23 @@
 
 ## Table of Contents
 
-- [kinnekode/restaurant/restaurant.proto](#kinnekode_restaurant_restaurant-proto)
-    - [RestaurantV2](#kinnekode-restaurant-RestaurantV2)
+- [kinnekode/restaurant/document/document_generated.proto](#kinnekode_restaurant_document_document_generated-proto)
+    - [DocumentGeneratedV1](#kinnekode-restaurant-document-DocumentGeneratedV1)
   
-- [kinnekode/restaurant/something.proto](#kinnekode_restaurant_something-proto)
-    - [Restaurant](#kinnekode-restaurant-Restaurant)
+- [kinnekode/restaurant/document/generate_document.proto](#kinnekode_restaurant_document_generate_document-proto)
+    - [GenerateDocumentV1](#kinnekode-restaurant-document-GenerateDocumentV1)
+    - [GenerateDocumentV1.Document](#kinnekode-restaurant-document-GenerateDocumentV1-Document)
+    - [GenerateDocumentV1.Document.InvoiceV1](#kinnekode-restaurant-document-GenerateDocumentV1-Document-InvoiceV1)
+    - [GenerateDocumentV1.Document.InvoiceV1.Item](#kinnekode-restaurant-document-GenerateDocumentV1-Document-InvoiceV1-Item)
+    - [GenerateDocumentV1.Document.InvoiceV1.Recipient](#kinnekode-restaurant-document-GenerateDocumentV1-Document-InvoiceV1-Recipient)
   
-- [kinnekode/restaurant/test/test2.proto](#kinnekode_restaurant_test_test2-proto)
-    - [Test](#kinnekode-restaurant-test-Test)
+    - [GenerateDocumentV1.Document.OutputFormat](#kinnekode-restaurant-document-GenerateDocumentV1-Document-OutputFormat)
+  
+- [kinnekode/restaurant/request.proto](#kinnekode_restaurant_request-proto)
+    - [RequestV1](#kinnekode-restaurant-RequestV1)
+  
+- [kinnekode/protobuf/decimal.proto](#kinnekode_protobuf_decimal-proto)
+    - [Decimal](#kinnekode-protobuf-Decimal)
   
 - [kinnekode/protobuf/uuid.proto](#kinnekode_protobuf_uuid-proto)
     - [Uuid](#kinnekode-protobuf-Uuid)
@@ -111,85 +120,208 @@
 
 
 
-<a name="kinnekode_restaurant_restaurant-proto"></a>
+<a name="kinnekode_restaurant_document_document_generated-proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
-## kinnekode/restaurant/restaurant.proto
+## kinnekode/restaurant/document/document_generated.proto
 
 
 
-<a name="kinnekode-restaurant-RestaurantV2"></a>
+<a name="kinnekode-restaurant-document-DocumentGeneratedV1"></a>
 
-### RestaurantV2
+### DocumentGeneratedV1
+Reply to request GenerateDocumentV1 defined in generate_document.proto
+
+TODO Define results according to Enterprise Integration Patterns
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="kinnekode_restaurant_document_generate_document-proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## kinnekode/restaurant/document/generate_document.proto
+
+
+
+<a name="kinnekode-restaurant-document-GenerateDocumentV1"></a>
+
+### GenerateDocumentV1
+Request to generate a document
+Is a command message and uses request/reply pattern
+Reply will be of type DocumentGeneratedV1 defined generate_document.proto
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| request | [kinnekode.restaurant.RequestV1](#kinnekode-restaurant-RequestV1) |  |  |
+| requested_documents | [GenerateDocumentV1.Document](#kinnekode-restaurant-document-GenerateDocumentV1-Document) | repeated |  |
+
+
+
+
+
+
+<a name="kinnekode-restaurant-document-GenerateDocumentV1-Document"></a>
+
+### GenerateDocumentV1.Document
 
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| id | [kinnekode.protobuf.Uuid](#kinnekode-protobuf-Uuid) |  |  |
+| output_formats | [GenerateDocumentV1.Document.OutputFormat](#kinnekode-restaurant-document-GenerateDocumentV1-Document-OutputFormat) | repeated |  |
+| invoice | [GenerateDocumentV1.Document.InvoiceV1](#kinnekode-restaurant-document-GenerateDocumentV1-Document-InvoiceV1) |  |  |
 
 
 
 
 
- 
 
- 
+<a name="kinnekode-restaurant-document-GenerateDocumentV1-Document-InvoiceV1"></a>
 
- 
-
- 
-
-
-
-<a name="kinnekode_restaurant_something-proto"></a>
-<p align="right"><a href="#top">Top</a></p>
-
-## kinnekode/restaurant/something.proto
-
-
-
-<a name="kinnekode-restaurant-Restaurant"></a>
-
-### Restaurant
+### GenerateDocumentV1.Document.InvoiceV1
 
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| id | [kinnekode.protobuf.Uuid](#kinnekode-protobuf-Uuid) |  |  |
+| delivered_on | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  |  |
+| currency_code | [string](#string) |  | three character currency code as specified in ISO 4217 ( see https://de.wikipedia.org/wiki/ISO_4217 ) |
+| recipient | [GenerateDocumentV1.Document.InvoiceV1.Recipient](#kinnekode-restaurant-document-GenerateDocumentV1-Document-InvoiceV1-Recipient) |  |  |
+| items | [GenerateDocumentV1.Document.InvoiceV1.Item](#kinnekode-restaurant-document-GenerateDocumentV1-Document-InvoiceV1-Item) | repeated |  |
 
 
 
 
 
- 
 
- 
+<a name="kinnekode-restaurant-document-GenerateDocumentV1-Document-InvoiceV1-Item"></a>
 
- 
-
- 
-
-
-
-<a name="kinnekode_restaurant_test_test2-proto"></a>
-<p align="right"><a href="#top">Top</a></p>
-
-## kinnekode/restaurant/test/test2.proto
-
-
-
-<a name="kinnekode-restaurant-test-Test"></a>
-
-### Test
+### GenerateDocumentV1.Document.InvoiceV1.Item
 
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| id | [kinnekode.protobuf.Uuid](#kinnekode-protobuf-Uuid) |  |  |
-| restaurant | [kinnekode.restaurant.Restaurant](#kinnekode-restaurant-Restaurant) |  |  |
+| description | [string](#string) |  |  |
+| quantity | [int64](#int64) |  |  |
+| netAmount | [kinnekode.protobuf.Decimal](#kinnekode-protobuf-Decimal) |  |  |
+| taxation | [kinnekode.protobuf.Decimal](#kinnekode-protobuf-Decimal) |  |  |
+| totalAmount | [kinnekode.protobuf.Decimal](#kinnekode-protobuf-Decimal) |  |  |
+| sum | [kinnekode.protobuf.Decimal](#kinnekode-protobuf-Decimal) |  |  |
+
+
+
+
+
+
+<a name="kinnekode-restaurant-document-GenerateDocumentV1-Document-InvoiceV1-Recipient"></a>
+
+### GenerateDocumentV1.Document.InvoiceV1.Recipient
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  |  |
+| street | [string](#string) |  |  |
+| city | [string](#string) |  |  |
+| postCode | [string](#string) |  |  |
+| country | [string](#string) |  |  |
+
+
+
+
+
+ 
+
+
+<a name="kinnekode-restaurant-document-GenerateDocumentV1-Document-OutputFormat"></a>
+
+### GenerateDocumentV1.Document.OutputFormat
+
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| OUTPUT_FORMAT_UNSPECIFIED | 0 |  |
+| OUTPUT_FORMAT_PDF | 1 |  |
+
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="kinnekode_restaurant_request-proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## kinnekode/restaurant/request.proto
+
+
+
+<a name="kinnekode-restaurant-RequestV1"></a>
+
+### RequestV1
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| request_id | [kinnekode.protobuf.Uuid](#kinnekode-protobuf-Uuid) |  | Unique id for the reply_to. must be ensured by the requestor |
+| reply_to | [string](#string) |  | Pub/Sub Topic where the reply should be send to currently only a assumption until implementation of reply is done |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="kinnekode_protobuf_decimal-proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## kinnekode/protobuf/decimal.proto
+
+
+
+<a name="kinnekode-protobuf-Decimal"></a>
+
+### Decimal
+Decimal https://en.wikipedia.org/wiki/IEEE_754#Decimal
+
+ Format:
+ The whole units of the amount.
+ Followed optional by a dot &#39;.&#39; and the number of nano (10^-9) units of the amount.
+ The value must be between 000000000 and 999999999 inclusive.
+
+Example: 42, -42, 42.0000, -42.0000, 42.0001, -42.0001
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| value | [string](#string) |  |  |
 
 
 

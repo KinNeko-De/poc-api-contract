@@ -3,6 +3,9 @@
 
 ## Table of Contents
 
+- [kinnekode/protobuf/decimal.proto](#kinnekode_protobuf_decimal-proto)
+    - [Decimal](#kinnekode-protobuf-Decimal)
+  
 - [kinnekode/protobuf/uuid.proto](#kinnekode_protobuf_uuid-proto)
     - [Uuid](#kinnekode-protobuf-Uuid)
   
@@ -99,6 +102,44 @@
     - [UInt64Value](#google-protobuf-UInt64Value)
   
 - [Scalar Value Types](#scalar-value-types)
+
+
+
+<a name="kinnekode_protobuf_decimal-proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## kinnekode/protobuf/decimal.proto
+
+
+
+<a name="kinnekode-protobuf-Decimal"></a>
+
+### Decimal
+Decimal https://en.wikipedia.org/wiki/IEEE_754#Decimal
+
+ Format:
+ The whole units of the amount.
+ Followed optional by a dot &#39;.&#39; and the number of nano (10^-9) units of the amount.
+ The value must be between 000000000 and 999999999 inclusive.
+
+Example: 42, -42, 42.0000, -42.0000, 42.0001, -42.0001
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| value | [string](#string) |  |  |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
 
 
 
