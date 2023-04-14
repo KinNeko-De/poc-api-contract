@@ -23,7 +23,7 @@ do
     mkdir ${projectoutputpath}
 
     find ${protopath}/${i} ${additionalprotos} -name *.proto \
-    -exec tools/protoc/win64/bin/protoc.exe --proto_path=${protobase} --doc_out=${projectoutputpath} --doc_opt=markdown,index.md {} +
+    -exec tools/protoc/win64/bin/protoc.exe --proto_path=${protobase} --doc_out=${projectoutputpath} --doc_opt=${protopath}/grpc-md.tmpl,index.md {} +
 
     echo "Generated doc for: $i"
 done
